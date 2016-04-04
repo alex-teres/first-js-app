@@ -1,11 +1,6 @@
 var mongoose = require('mongoose');
 
 var Schema = new mongoose.Schema({
-  articleID:{
-    type: String,
-    require: true,
-    unique: true
-  },
   text: {
     type: String,
     required: true

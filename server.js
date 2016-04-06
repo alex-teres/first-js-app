@@ -14,7 +14,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
 app.use(bodyParser());
-
+app.use('/', express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
 	res.status(200).json({message: 'Server running'})
 });

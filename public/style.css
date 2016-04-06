@@ -1,0 +1,10 @@
+.form-signin{
+	margin: auto;
+	width: 300px;
+}
+.form-signin input:first-child{
+	margin-bottom: 5px;
+}
+.form-signin button{
+	width: 100%;
+}

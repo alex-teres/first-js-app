@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html ng-app ="App">
-    <head>
-        <title></title>
-        <link rel="stylesheet" href="bootstrap.min.js">
-        <script src="js/angular.js" charset="UTF-8"></script>
-        <script src="js/ui.router.js" charset="UTF-8"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="app.js" charset="UTF-8"></script>
-        <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
-    </head>
-    <body>
-        <div class="container" ui-view=""></div>
+<head>
+    <title>MEAN</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="js/angular.js" charset="UTF-8"></script>
+    <script src="js/ui.router.js" charset="UTF-8"></script>
+    <script src="app.js" charset="UTF-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+      <form class="form-signin" action="/auth" method="POST" role="form"> 
+          <legend class="h1">Please sign in</legend>
+          <div class="form-group">
+              <label for="inputText">Email</label>
+              <input type="text" class="form-control" id="username" placeholder="Input user name...">
+              <label for="inputPassword">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Input password...">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+      </form>  
+  </div>      <!--  <div class="container" ui-view=""></div> -->
+
 </body>
 </html>

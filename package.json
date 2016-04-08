@@ -1,12 +1,15 @@
 {
   "name": "test_pro",
   "version": "1.0.0",
-  "description": "",
+  "description": "my first app on node js",
   "main": "server.js",
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.7",
     "passport": "^0.3.2",
+    "passport-jwt": "^2.0.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {

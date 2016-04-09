@@ -1,13 +1,16 @@
 var express = require('express');
+var passport = require('passport');
 
 function routerFact(model) {
 	var router = express.Router();
+
 	router.get('/', function (req, res) {
 		model.find(function (err, items) {
 			res.status(200).json(items);
 		});
  });
-  router.get('/:id', function (req, res) {
+
+  router.get('/:id',function (req, res) {
    model.findById(req.params.id,function (err,items) {
     if (!items) {
      res.status(404).json({error: 'Not found'});
@@ -19,7 +22,8 @@ function routerFact(model) {
    }
  });
  });
-  router.delete('/:id', function (req, res) {
+
+  router.delete('/:id', passport.authenticate('jwt', { session: false}), function (req, res) {
     model.findById(req.params.id, function (err, items){
       if (!items) {
         res.status(404).json({error: 'Not found'});
@@ -33,7 +37,8 @@ function routerFact(model) {
      });
     });
   });
-  router.put('/:id', function (req, res) {
+
+  router.put('/:id', passport.authenticate('jwt', { session: false}), function (req, res) {
    model.findById(req.params.id, function (err, items) {
     if (!items) {
       res.status(404).json({error: 'items not found'});
@@ -49,7 +54,8 @@ function routerFact(model) {
     });
   });
  });
-  router.post('/', function (req, res) {
+
+  router.post('/', passport.authenticate('jwt', { session: false}), function (req, res) {
 
     var post = new model(req.body);
 

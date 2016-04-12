@@ -1,5 +1,5 @@
 var express = require('express');
-var passport = require('passport');
+var passport = require('passport');//ctrl+shift+m
 
 function routerFact(model) {
 	var router = express.Router();
@@ -33,7 +33,7 @@ function routerFact(model) {
           res.status(200).json({message: 'Items removed'});
         } else {
          res.status(500).json({error: 'Server error'});
-       } 
+       }
      });
     });
   });
@@ -44,7 +44,7 @@ function routerFact(model) {
       res.status(404).json({error: 'items not found'});
     }
     items.update(req.body,function (err) {
-      if (err) 
+      if (err)
       {
         res.status(500).json({error: 'Server error'});
       }
@@ -74,7 +74,7 @@ function routerFact(model) {
   }
 });
 
-  return router
+  return router;
 }
 
 module.exports = routerFact;

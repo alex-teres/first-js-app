@@ -9,6 +9,11 @@ var Schema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true
+	},
+	type:{
+		type: String,
+		default:'user',
+		required: true
 	}
 });
 

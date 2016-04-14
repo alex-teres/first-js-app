@@ -12,8 +12,11 @@ var Schema = new mongoose.Schema({
   theme:{
   	type: String,
   	required:true
+  },
+  owner:{
+    type:String,
+    required:true
   }
 });
 
 module.exports = mongoose.model('article', Schema);
-

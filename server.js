@@ -10,9 +10,10 @@ var crudRouter = require('./app/routes/crudRouter');
 var Article = require('./app/model/article');
 var User = require('./app/model/user');
 var auth = require('./app/routes/auth.js');
+var conf = require('./config');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(conf.dataBase);
 
 app.use(bodyParser());
 app.use('/', express.static(__dirname + '/public'));

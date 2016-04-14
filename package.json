@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "bcryptjs": "^2.3.0",
+    "bower": "^1.7.9",
     "express": "^4.13.4",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.7",
@@ -14,7 +15,9 @@
   },
   "devDependencies": {
     "body-parser": "^1.15.0",
+    "browser-sync": "^2.12.3",
     "express": "^4.13.4",
+    "gulp": "^3.9.1",
     "mongoose": "^4.4.8",
     "passport": "^0.3.2"
   },

@@ -10,10 +10,10 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = conf.jwtSecretKey;
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    user.findOne({id: jwt_payload.sub}, function(err, user) {
+    user.findOne({username: jwt_payload.username}, function(err, user) {
         if (err) {
             return done(err, false);
         }
-        done(null, user);
+        	return done(null, user);
     });
 }));

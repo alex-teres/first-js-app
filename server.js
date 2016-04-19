@@ -11,6 +11,7 @@ var Article = require('./app/model/article');
 var User = require('./app/model/user');
 var auth = require('./app/routes/auth.js');
 var conf = require('./config');
+var userGroups = require('./app/model/userGroups');
 
 var mongoose = require('mongoose');
 mongoose.connect(conf.dataBase);
@@ -26,6 +27,6 @@ app.use('/articles', articles);
 
 app.use('/articles', crudRouter(Article));
 app.use('/users', crudRouter(User));
-
+app.use('/usergroups', crudRouter(userGroups));
 
 app.listen(8080);

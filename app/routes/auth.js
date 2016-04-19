@@ -26,21 +26,20 @@ var conf = require('../../config.js') ;
   });*/
 
   router.post('/login', function(req, res) {
-    User.findOne({username:req.body.username}, function(err, user) {
-
-      if (err) throw err;
+    User.findOne({username:req.body.username,password:req.body.password},function (err,user) {
+     if (err) throw err;
       if (user) {
        if (user.password !== req.body.password) {
-        res.status(401).json({message: 'Wrong password.'});
+        res.status(401).json({message: 'Wrong password'});
       } else {
-        var token = jwt.sign(user, conf.jwtSecretKey);
+        console.log(user);
+        var token = jwt.sign({username: user.username}, conf.jwtSecretKey);
         res.json({token: token});
       }
     } else {
-     res.json({message: 'User not found.' });
+     res.json({message: 'User not found' });
    }
-
- });
+    });
   });
 
   module.exports = router;

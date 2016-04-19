@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.ObjectId;
 
 var Schema = new mongoose.Schema({
   text: {
@@ -6,16 +7,16 @@ var Schema = new mongoose.Schema({
     required: true
   },
   tag: {
-    type: String,
-    required: true
+    type: String
   },
-  theme:{
+  title:{
   	type: String,
   	required:true
   },
   owner:{
-    type:String,
-    required:true
+    type:ObjectId,
+    required:true,
+    ref: 'user'
   }
 });
 

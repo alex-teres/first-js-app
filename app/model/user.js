@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var ObjectId = mongoose.Schema.ObjectId;
+
 var Schema = new mongoose.Schema({
 	email:{
 		type:String,
@@ -17,9 +18,8 @@ var Schema = new mongoose.Schema({
 	},
 	role:{
 		type:Number,
-		ref:'userGroups',
-		default:'1',
-		selected:false
+		default: 1,
+		ref:'userGroups'
 	},
 	article:[{ type:ObjectId , ref:'article' }]
 });

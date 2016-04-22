@@ -1,16 +1,15 @@
 var express = require('express');
 var passport = require('passport');//ctrl+shift+m
-var jwtstrategy = require('../auth/jwt.strategy');
 var jwt = require('jsonwebtoken');
 
 
-function routerFact(model) {
+module.exports =  function (model) {
 	var router = express.Router();
 
 	router.get('/', function (req, res) {
 		model.find(function (err, items) {
 			res.status(200).json(items);
-		}).select('-password');
+		}).select('-password -role');
  });
 
   router.get('/:id',passport.authenticate('jwt', {session: false }), function (req, res) {
@@ -26,18 +25,14 @@ function routerFact(model) {
  }).select('-password');
  });
 
-  router.post('/', function (req, res) {
-
-if(model == article){
-    req.body.owner = user._id;
-    }
+  router.post('/', passport.authenticate('jwt', {session: false }), function (req, res) {
     var post = new model(req.body);
 
 
     post.save(function (err, post) {
       if (err) {
         /*res.status(500).json({error: 'Server error'});*/
-      res.send(err);
+        res.send(err);
       }
       else {
         res.status(200).json({message: 'Created'});
@@ -58,33 +53,32 @@ if(model == article){
       else {
         res.status(200).json({message: 'Updated'});
       }
-    });
+    }).select('-password -role -username');
   });
  });
 
   router.delete('/:id',function (req, res) {
-     model.findById(req.params.id, function (err, items){
-     if(req.user.role == '2' || model.owner == req.user.username || model.username == req.user.username){
-        if (!items) {
-          res.status(404).json({error: 'Not found'});
-        }
-        else {
-          items.remove(function (err) {
-            if (!err) {
-             res.status(200).json({message: 'Items removed'});
-           } else {
-             res.status(500).json({error: 'Server error'});
-           }
-         });
-        }
-     }
-      else{
-        res.status(401).json({error:'Access denied'});
+   model.findById(req.params.id, function (err, items){
+    if(req.user.role == '2' || model.owner.equals(req.user._id) || model._id.equals(req.user._id)){
+      if (!items) {
+        res.status(404).json({error: 'Not found'});
       }
-    });
+      else {
+        items.remove(function (err) {
+          if (!err) {
+           res.status(200).json({message: 'Items removed'});
+         } else {
+           res.status(500).json({error: 'Server error'});
+         }
+       });
+      }
+    }
+    else{
+      res.status(401).json({error:'Access denied'});
+    }
   });
+ });
 
   return router;
-}
+};
 
-module.exports = routerFact;

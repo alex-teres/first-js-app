@@ -28,7 +28,7 @@ var conf = require('../../config.js') ;
   router.post('/login', function(req, res) {
     User.findOne({username:req.body.username,password:req.body.password},function (err,user) {
      if (err) throw err;
-      if (user) {
+     if (user) {
        if (user.password !== req.body.password) {
         res.status(401).json({message: 'Wrong password'});
       } else {
@@ -39,7 +39,7 @@ var conf = require('../../config.js') ;
     } else {
      res.json({message: 'User not found' });
    }
-    });
+ });
   });
 
   module.exports = router;

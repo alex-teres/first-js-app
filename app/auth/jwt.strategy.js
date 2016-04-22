@@ -6,14 +6,18 @@ var user = require('../model/user');
 var conf = require('../../config') ;
 var opts = {};
 
-opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-opts.secretOrKey = conf.jwtSecretKey;
 
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    user.findOne({username: jwt_payload.username}, function(err, user) {
-        if (err) {
+module.exports = function (app) {
+	opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+	opts.secretOrKey = conf.jwtSecretKey;
+	passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+        user.findOne({username: jwt_payload.username}, function(err, user) {
+           app.user = user;
+           if (err) {
             return done(err, false);
         }
-        	return done(null, user);
+        return done(null, user);
+
     });
-}));
+    }));
+};

@@ -1,23 +1,47 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.ObjectId;
+var User = require('./user');
 
-var Schema = new mongoose.Schema({
-  text: {
-    type: String,
-    required: true
-  },
-  tag: {
-    type: String
-  },
-  title:{
-  	type: String,
-  	required:true
-  },
-  owner:{
-    type:ObjectId,
-    required:true,
-    ref: 'user'
-  }
-});
+module.exports = function(app) {
 
-module.exports = mongoose.model('article', Schema);
+  var Schema = new mongoose.Schema({
+    text: {
+      type: String,
+      required: true
+    },
+    tag: {
+      type: String
+    },
+    title:{
+      type: String,
+      required:true
+    },
+    owner:{
+      type:ObjectId,
+      ref: 'user'
+    }
+
+  });
+
+  Schema.pre('save', function(next) {
+    this.owner = app.user._id;
+    User.update({_id: app.user._id},{$pushAll: {article:[this._id]}}, function(err){
+      if(err){
+        console.log(err);
+      }else{
+        console.log("Successfully added article in user");
+      }
+    });
+    next();
+  });
+
+  return mongoose.model('article', Schema);
+};
+
+
+
+
+
+
+
+

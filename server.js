@@ -1,5 +1,3 @@
-'use strict';
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -7,10 +5,11 @@ var app = express();
 var users = require('./app/routes/user');
 var articles = require('./app/routes/article');
 var crudRouter = require('./app/routes/crudRouter');
-var Article = require('./app/model/article');
+var Article = require('./app/model/article')(app);
 var User = require('./app/model/user');
 var auth = require('./app/routes/auth.js');
 var conf = require('./config');
+var jwtstrategy = require('./app/auth/jwt.strategy')(app);
 var userGroups = require('./app/model/userGroups');
 
 var mongoose = require('mongoose');

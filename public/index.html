@@ -2,9 +2,9 @@
 <html ng-app ="myApp">
 <head>
 	<title>Home</title>
+	<script src="bower/jquery/dist/jquery.min.js"></script>
 	<script src="bower/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="bower/angular/angular.min.js"></script>
-	<script src="bower/jquery/dist/jquery.min.js"></script>
 	<script src="bower/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.min.css">
 	<script src="app.js"></script>
@@ -12,5 +12,7 @@
 </head>
 <body>
 		<div ui-view></div>
+		<script src="components/auth/auth.js"></script>
+		<script src="components/home/home.js"></script>
 </body>
 </html>

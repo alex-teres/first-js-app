@@ -11,3 +11,14 @@
 {
     width: 100%;
 }
+
+.authMessage {
+    position: absolute;
+    top: 0;
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -webkit-box-shadow: 0 0 3px;
+    -moz-box-shadow: 0 0 3px;
+    box-shadow: 0 0 3px;
+    padding: 10px;
+}

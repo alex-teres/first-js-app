@@ -5,6 +5,7 @@
     <input type="text" class="form-control" ng-model="user.username"  placeholder="Input user name...">
     <input type="password" class="form-control" ng-model="user.password"  placeholder="Input password...">
   </div>
-  <button type="submit" class="btn btn-primary btn-lg" ng-click="log()">Submit</button>
+  <button type="submit" class="btn btn-primary btn-lg" ng-click="log();">Submit</button>
 </form>
+  <h3 class="bg-danger authMessage" ng-show="show == true">{{errMessage}}</h3>
 </div>

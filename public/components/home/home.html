@@ -1,21 +1,29 @@
-		<nav class="navbar navbar-light bg-faded">
-			<a class="navbar-brand" href="#">{4:Navbar}</a>
-			<ul class="nav navbar-nav">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Home</a>
-				</li>
-			</ul>
-			<form class="form-inline navbar-form pull-right">
-				<input class="form-control" type="text" placeholder="Search">
-				<button class="btn btn-success-outline" type="submit">Search</button>
-			</form>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" ui-sref="home">Home</a>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav"><!-- left navbar -->
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<img ng-src="">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">{{username}}<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a>Profile</a></li>
+							<!--<li><a ui-sref="">Settings</a></li>-->
+							<li><a ng-click="logOut();">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</nav>
+		

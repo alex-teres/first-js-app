@@ -1,15 +1,16 @@
 (function () {
     'use strict';
-    function authDirective() {
+    function homeDirective() {
         return {
             restrict: 'E',
             scope: {},
-            templateUrl: 'home.html'
+            templateUrl: 'components/home/home.html',
+            controller: 'homeCtrl'
         };
     }
     angular
         .module('home', [])
-        .directive('home', authDirective)
+        .directive('home', homeDirective)
         .config(function ($stateProvider) {
             $stateProvider
                 .state('home', {
@@ -17,5 +18,11 @@
                     template: '<home></home>'
                 })
         })
-        .controller();
+        .controller('homeCtrl', ['$scope', '$http', '$state',  function ($scope, $http, $state) {            
+            $scope.logOut = function () {
+                localStorage.removeItem('Authorization');                
+                $state.go('auth');
+            };
+            
+        }]);
 })();

@@ -5,7 +5,7 @@
             restrict: 'E',
             scope: {},
             templateUrl: 'components/auth/auth.html',
-            controller: 'LoginCtrl'
+            controller: 'authCtrl'
         };
     }
     angular
@@ -18,17 +18,31 @@
                     template: '<auth></auth>'
                 })
         })
-        .controller('LoginCtrl', ['$scope', '$http',  function ($scope, $http) {
-
+        .controller('authCtrl', ['$scope', '$http', '$state',  function ($scope, $http, $state) {
             $scope.log = function () {
                 $http.post('/auth/login', {username: $scope.user.username, password: $scope.user.password})
                     .then(
-                        function (r) {
-                            localStorage.setItem('Authorization', $scope.token);
-                            $http.get('')
+                        function (res) {
+                            localStorage.setItem('Authorization', res.data.token);
+                            $state.go('home');
                         },
-                        function (x) {
-                            console.log('post error');
+                        function (err) {
+                            $scope.show = true;
+                            setTimeout(function () {
+                                $scope.$apply(function()
+                                {
+                                    $scope.show = false;
+                                });
+                            }, 3000);
+                            switch (err.status) {
+                                case 404:
+                                    $scope.errMessage = 'User not found';
+                                    break;
+                                case 401:
+                                    $scope.errMessage = 'Wrong password';
+                                    break;
+                            }
+
                         }
                     )
             }

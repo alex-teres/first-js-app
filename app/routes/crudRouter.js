@@ -25,19 +25,18 @@ module.exports =  function (model) {
  }).select('-password');
  });
 
-  router.post('/', passport.authenticate('jwt', {session: false }), function (req, res) {
+  router.post('/',  function (req, res) {
     var post = new model(req.body);
 
 
-    post.save(function (err, post) {
+    post.save(function (err) {
       if (err) {
-        /*res.status(500).json({error: 'Server error'});*/
-        res.send(err);
+       res.status(500).json({error: 'Server error'});
       }
       else {
         res.status(200).json({message: 'Created'});
       }
-    });
+    }).select('-role');
   });
 
   router.put('/:id', passport.authenticate('jwt', { session: false }), function (req, res) {

@@ -25,10 +25,18 @@ build/Release
 
 # Dependency directory
 node_modules
-public/bower
+public/assets
 
 # Optional npm cache directory
 .npm
 
 # Optional REPL history
 .node_repl_history
+Будет удалено .idea/compiler.xml
+Будет удалено .idea/copyright/
+Будет удалено .idea/misc.xml
+Будет удалено .idea/modules.xml
+Будет удалено .idea/node_pro.iml
+Будет удалено .idea/workspace.xml
+Будет удалено public/assets/
+Будет удалено public/img/

@@ -2,14 +2,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var app = express();
-var users = require('./app/routes/user');
-var articles = require('./app/routes/article');
-var crudRouter = require('./app/routes/crudRouter');
-var Article = require('./app/model/article')(app);
 var User = require('./app/model/user');
+var Article = require('./app/model/article')(app);
+var users = require('./app/routes/user')(app);
+var articles = require('./app/routes/article')(app);
+var crudRouter = require('./app/routes/crudRouter');
 var auth = require('./app/routes/auth.js');
 var conf = require('./config');
-var jwtstrategy = require('./app/auth/jwt.strategy')(app);
+require('./app/auth/jwt.strategy')(app);
 var userGroups = require('./app/model/userGroups');
 
 var mongoose = require('mongoose');
@@ -26,6 +26,6 @@ app.use('/articles', articles);
 
 app.use('/articles', crudRouter(Article));
 app.use('/users', crudRouter(User));
-app.use('/usergroups', crudRouter(userGroups));
+app.use('/userGroups', crudRouter(userGroups));
 
 app.listen(8080);

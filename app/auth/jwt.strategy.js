@@ -16,7 +16,7 @@ module.exports = function (app) {
            if (err) {
             return done(err, false);
         }
-        return done(null, user);
+            return done(null, user);
 
     });
     }));

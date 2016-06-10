@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.ObjectId;
 
 var Schema = new mongoose.Schema({
-	_id: {
+	id: {
 		type: Number,
 		required: true
 	},

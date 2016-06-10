@@ -1,8 +1,11 @@
 var mongoose = require('mongoose');
-
 var ObjectId = mongoose.Schema.ObjectId;
 
 var Schema = new mongoose.Schema({
+	avatarUrl: {
+		type: String,
+		default: "/img/avatar.png"
+	},
 	email:{
 		type:String,
 		required:true
@@ -20,8 +23,7 @@ var Schema = new mongoose.Schema({
 		type:Number,
 		default: 1,
 		ref:'userGroups'
-	},
-	article:[{ type:ObjectId , ref:'article' }]
+	}
 });
 
 var model = mongoose.model('user', Schema);

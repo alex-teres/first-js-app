@@ -1,0 +1,8 @@
+        <h1>Articles</h1>
+        {{message}}
+<div class="media" ng-repeat = "article in articles">
+    <div class="media-body">
+        <h4 class="media-heading">{{article.title}} </h4>
+       <p style=" white-space: pre-wrap; ">{{article.text}}</p>
+    </div>
+</div>

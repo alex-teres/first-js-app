@@ -13,12 +13,12 @@
 				<ul class="nav navbar-nav"><!-- left navbar -->
 
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<img ng-src="">
+				<ul class="nav navbar-nav navbar-right"><!-- сделай что бы картинка и выпадающий список были в ровень -->
+					<li><a ui-sref="profile" style="padding: 1px; width:50px;"><img alt="avatar" ng-src="{{user.avatarUrl}}" style="width:50px; cursor:pointer;"></a></li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown">{{username}}<b class="caret"></b></a>
+						<a class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a>Profile</a></li>
+							<li><a>Settings</a></li>
 							<!--<li><a ui-sref="">Settings</a></li>-->
 							<li><a ng-click="logOut();">Logout</a></li>
 						</ul>
@@ -26,4 +26,12 @@
 				</ul>
 			</div>
 		</nav>
-		
+		<h3 class="bg-danger authMessage" ng-show="show == true">{{errMessage}}</h3>
+
+		<div class="row">
+		<div class="col-md-2 col-sm-2"></div>
+		<div class="col-md-8 col-sm-8">
+			<articles></articles>
+		</div>
+		<div class="col-md-2 col-sm-2"></div>
+		</div>

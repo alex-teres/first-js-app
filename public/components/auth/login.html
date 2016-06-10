@@ -1,0 +1,12 @@
+<div class="container">
+<form class="form-signin"  novalidate>
+  <legend class="h1">Login</legend>
+  <div class="form-group">
+    <input type="text" class="form-control" ng-model="user.username"  placeholder="Input user name...">
+    <input type="password" class="form-control" ng-model="user.password"  placeholder="Input password...">
+  </div>
+  <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="log();">Submit</button>
+  <button class="btn btn-link btn-lg btn-block" ui-sref="signUp">Sign up</button>
+</form>
+  <h3 class="bg-danger authMessage" ng-show="show == true">{{errMessage}}</h3>
+</div>

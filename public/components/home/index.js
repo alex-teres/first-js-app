@@ -1,5 +1,6 @@
-'use strict';
 import angular from 'angular';
+import HomeCtrl from './home.controller';
+
 const NAME = 'home';
 
     function homeDirective() {
@@ -7,28 +8,13 @@ const NAME = 'home';
             restrict: 'E',
             scope: {},
             templateUrl: 'components/home/home.html',
-            controller: 'homeCtrl'
+            controller: 'homeCtrl as vm',
+            bindToController: true
         };
     }
     angular
         .module(NAME, [])
-        .controller('homeCtrl', ['$scope', '$http', '$state', 'User', function ($scope, $http, $state, User) {
-
-            User.fetch().then(
-                function(res){
-                    $scope.user = res;
-                },
-                function(x){
-                    $scope.errMessage = "Something wrong";
-                    console.log(x);
-                }
-            );
-
-            $scope.logOut = function () {
-                localStorage.removeItem('Authorization');
-                $state.go('login');
-            };
-        }])
+        .controller('homeCtrl', ['$scope', '$state', 'User', HomeCtrl])
         .directive('home', homeDirective)
         .config(function ($stateProvider) {
             $stateProvider
@@ -37,4 +23,5 @@ const NAME = 'home';
                     template: '<home></home>'
                 })
         });
+
 export default NAME;

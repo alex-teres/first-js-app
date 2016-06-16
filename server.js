@@ -16,7 +16,16 @@ var mongoose = require('mongoose');
 mongoose.connect(conf.dataBase);
 
 app.use(bodyParser());
-app.use('/', express.static(__dirname + '/public'));
+
+app.use(function (req, res, next) {
+
+	res.set('Access-Control-Allow-Origin','*');
+	res.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
+	res.set("Access-Control-Allow-Headers", "Authorization, Content-Type")
+
+	next();
+});
+
 app.get('/', function(req, res) {
 	res.status(200).json({message: 'Server running'});
 });
@@ -27,5 +36,7 @@ app.use('/articles', articles);
 app.use('/articles', crudRouter(Article));
 app.use('/users', crudRouter(User));
 app.use('/userGroups', crudRouter(userGroups));
+
+
 
 app.listen(8080);

@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+var webpack = require('webpack');
 
 module.exports = {
     // context: __dirname + '/public',
@@ -7,6 +7,13 @@ module.exports = {
         path: __dirname + '/public/assets',
         filename: 'bundle.js'
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        })
+    ],
     module: {
         loaders: [
 
@@ -22,6 +29,7 @@ module.exports = {
             { test: /\.css$/, loader: 'style-loader!css-loader' },
             {
                 test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
                 loader: "babel-loader"
             },
             {

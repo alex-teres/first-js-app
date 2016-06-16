@@ -1,5 +1,8 @@
-'use strict';
-import angular from 'angular';
+import angular from "angular";
+import Articles from "./articles.service";
+import ArticlesCtrl from "./articles.controller";
+import addArticleCtrl from './addArticle.controller';
+
 const NAME = 'articles';
 
     function articlesDirective() {
@@ -10,30 +13,26 @@ const NAME = 'articles';
             controller: 'articlesCtrl'
         };
     }
+function addArticleDirective() {
+    return {
+        restrict: 'E',
+        scope: {},
+        templateUrl: 'components/articles/addArticle.html',
+        controller: 'addArticleCtrl'
+    };
+}
    angular
-        .module(NAME, [])
-        .directive('articles', articlesDirective)
-        .config(function ($stateProvider) {
-            $stateProvider
-                .state('articles', {
-                    url: '/articles',
-                    template: '<articles></articles>'
-                })
-        })
-        .controller('articlesCtrl', ['$scope', '$http', '$state',  function ($scope, $http, $state) {
-            $http.get('/articles/myArticles').then(
-                function (res) {
-                    if (res.data.length == 0){
-                        $scope.message = "You don't have any articles";
-                    }
-                    else{
-                        $scope.articles = res.data;
-                    }
-                },
-                function (err) {
-                    console.log('error on index.js ' + err );
-                }
-            )
-        }]);
+       .module(NAME, [])
+       .directive('articles', articlesDirective)
+       .directive('addArticle', addArticleDirective)
+       .service('Articles', ['$http', Articles])
+       .controller('articlesCtrl', ['$scope', 'Articles', ArticlesCtrl])
+       .config(function ($stateProvider) {
+           $stateProvider
+               .state('articles', {
+                   url: '/articles',
+                   template: '<articles></articles>'
+               })
+       });
 
 export default NAME;

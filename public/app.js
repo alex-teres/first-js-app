@@ -1,3 +1,4 @@
+import 'jquery';
 import angular from'angular';
 import uiRouter from 'angular-ui-router';
 import auth from  './components/auth';
@@ -5,7 +6,8 @@ import home from './components/home';
 import articles from './components/articles';
 import user from './components/user';
 
-require('../node_modules/bootstrap/less/bootstrap.less');
+import '../node_modules/bootstrap/less/bootstrap.less';
+import 'bootstrap';
 
 angular
     .module('myApp', [
@@ -23,6 +25,8 @@ angular
     })
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/home');
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
     })
     .run(['$state', function ($state) {
         if (!localStorage.getItem('Authorization')) {

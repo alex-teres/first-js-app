@@ -1,10 +1,28 @@
-<form novalidate role="form">
-	<div class="form-group">
-		<input type="text" class="form-control" placeholder="title...">
+<form novalidate class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+	  aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="form-group modal-header">
+				<span class="modal-title h4">New article</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">&times;</span></button>
 	</div>
-    <div class="form-group">
-        <textarea class="form-control" placeholder="title..." rows="3"></textarea>
-    </div>
 
-	<button class="btn btn-primary">Public</button>
+			<div class="form-group modal-body">
+				<input type="text" class="form-control" ng-model="vm.article.title" placeholder="Title" required>
+				<br>
+				<textarea class="form-control" ng-model="vm.article.text" placeholder='Put some text...'
+						  rows="3" required></textarea>
+				<div class="categories">
+				<div class="category"><span class="glyphicon glyphicon-plus"></span> asdf</div>
+					<div class="subCategory"><span class="glyphicon glyphicon-plus"></span> asdf</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="submit" ng-click="vm.addArticle()">Public</button>
+				<button class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
 </form>

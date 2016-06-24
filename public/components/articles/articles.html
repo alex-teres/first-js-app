@@ -1,10 +1,38 @@
-        <h1>Articles</h1>
-        {{message}}
-<div class="media" ng-repeat = "article in articles">
+<span class="h2">Articles</span>
+<button type="button" class="btn btn-success btn-sm" style="float: right" data-toggle="modal"
+        data-target=".bs-example-modal-lg">
+    <span class="glyphicon glyphicon-plus"></span>
+</button>
+<br>
+{{message}}
+
+<div class="media" ng-repeat="article in articles">
     <div class="media-body">
-        <h4 class="media-heading">{{article.title}} </h4>
-       <p style=" white-space: pre-wrap; ">{{article.text}}</p>
+        <span class="h4 media-heading">{{article.title}} </span>
+        <button class="btn btn-danger btn-sm" style="float: right" ng-click="vm.toggleModal(article)"
+                data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-minus"></span></button>
+        <p style="white-space: pre-wrap;">{{article.text}}</p>
     </div>
 </div>
-        <br>
-             <button type="button" class="btn btn-default btn-block btn-sm">Add article</button>
+
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="form-group modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="form-group modal-body">
+                <span class="h4">Are you sure you want to delete an article with title "{{vm.article.title}}"?</span>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="vm.deleteArticle()">Ok</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<add-article></add-article>

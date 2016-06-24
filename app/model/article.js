@@ -10,17 +10,21 @@ module.exports = function(app) {
       required: true
     },
     tag: {
-      type: String
+      type: Array
     },
     title:{
       type: String,
+      required:true
+    },
+    category:{
+      type: ObjectId,
+      ref: 'Category',
       required:true
     },
     owner:{
       type:ObjectId,
       ref: 'user'
     }
-
   });
 
   Schema.pre('save', function(next) {

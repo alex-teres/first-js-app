@@ -1,7 +1,7 @@
 import Api from '../api/api.service';
 
 class User extends Api {
-    fetch() {
+    me() {
         var deferred = this.$q.defer();
 
         this.$http.get(`${this.url}/users/me`).then(

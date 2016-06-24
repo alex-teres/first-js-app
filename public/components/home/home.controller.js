@@ -1,17 +1,17 @@
 class HomeCtrl{
-    constructor($scope, $state, User){
+    constructor($scope, $state, User, Auth){
 
         this.$state = $state;
 
-        User.fetch().then(
+        User.me().then(
             function (res) {
                 $scope.user = res;
+                Auth.setUser(res);
             },
             function (x) {
                 $scope.errMessage = "Something wrong";
                 console.log(x);
             });
-              
 
     };
     

@@ -4,6 +4,7 @@ var passport = require('passport');
 var app = express();
 var User = require('./app/model/user');
 var Article = require('./app/model/article')(app);
+var Category = require('./app/model/category')();
 var users = require('./app/routes/user')(app);
 var articles = require('./app/routes/article')(app);
 var crudRouter = require('./app/routes/crudRouter');
@@ -36,6 +37,7 @@ app.use('/articles', articles);
 app.use('/articles', crudRouter(Article));
 app.use('/users', crudRouter(User));
 app.use('/userGroups', crudRouter(userGroups));
+app.use('/categories', crudRouter(Category));
 
 
 

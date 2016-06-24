@@ -35,7 +35,7 @@ angular
     .directive('signUp', signUpDirective)
     .controller('authSignUp', ['$scope', '$state', 'Auth', AuthSignUpController])
     
-    .service('Auth', ['$http', '$q', Auth])
+    .service('Auth', ['$http', '$q', '$rootScope', Auth])
     .config(function ($stateProvider) {
         $stateProvider
             .state('login', {

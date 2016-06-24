@@ -3,6 +3,6 @@ import Api from './api.service';
 
 angular
     .module('api', [])
-    .service('Api', Api);
+    .service('Api', ['$rootScope', Api]);
 
 export default 'api';

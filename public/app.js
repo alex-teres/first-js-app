@@ -1,4 +1,5 @@
 import 'jquery';
+import 'jquery-ui';
 import angular from'angular';
 import uiRouter from 'angular-ui-router';
 import auth from  './components/auth';
@@ -6,6 +7,7 @@ import home from './components/home';
 import articles from './components/articles';
 import user from './components/user';
 
+import 'nestedSortable';
 import '../node_modules/bootstrap/less/bootstrap.less';
 import 'bootstrap';
 
@@ -16,11 +18,11 @@ angular
         home,
         articles,
         user
-    ])
+        ])
     .directive('app', function () {
         return {
             restrict: 'E',
-            template: '<div ui-view></div>'
+            template: '<ui-view></ui-view>'
         }
     })
     .config(function ($stateProvider, $urlRouterProvider) {

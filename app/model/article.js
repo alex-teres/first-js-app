@@ -18,8 +18,7 @@ module.exports = function(app) {
     },
     category:{
       type: ObjectId,
-      ref: 'Category',
-      required:true
+      ref: 'Category'
     },
     owner:{
       type:ObjectId,

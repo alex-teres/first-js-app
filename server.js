@@ -7,6 +7,7 @@ var Article = require('./app/model/article')(app);
 var Category = require('./app/model/category')();
 var users = require('./app/routes/user')(app);
 var articles = require('./app/routes/article')(app);
+var categories = require('./app/routes/category')();
 var crudRouter = require('./app/routes/crudRouter');
 var auth = require('./app/routes/auth.js');
 var conf = require('./config');
@@ -21,8 +22,8 @@ app.use(bodyParser());
 app.use(function (req, res, next) {
 
 	res.set('Access-Control-Allow-Origin','*');
-	res.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
-	res.set("Access-Control-Allow-Headers", "Authorization, Content-Type")
+	res.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+	res.set("Access-Control-Allow-Headers", "Authorization, Content-Type");
 
 	next();
 });
@@ -33,6 +34,7 @@ app.get('/', function(req, res) {
 app.use('/auth',auth);
 app.use('/users', users);
 app.use('/articles', articles);
+app.use('/categories', categories);
 
 app.use('/articles', crudRouter(Article));
 app.use('/users', crudRouter(User));

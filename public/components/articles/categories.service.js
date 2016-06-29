@@ -1,7 +1,7 @@
 import CrudService from '../api/crud.service';
 
-class Articles extends CrudService {
+class Categories extends CrudService {
     get path() {return 'categories';}
 }
 
-export default Articles;
+export default Categories;

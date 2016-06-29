@@ -8,8 +8,12 @@ import articles from './components/articles';
 import user from './components/user';
 
 import 'nestedSortable';
+import '../node_modules/select2/dist/js/select2.full.min';
+import '../node_modules/select2/dist/css/select2.min.css';
 import '../node_modules/bootstrap/less/bootstrap.less';
 import 'bootstrap';
+import '../node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css';
+
 
 angular
     .module('myApp', [

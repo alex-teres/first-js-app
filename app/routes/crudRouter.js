@@ -43,7 +43,7 @@ module.exports = function (model) {
 
         post.save(function (err, item) {
             if (err) {
-                res.status(500).json({error: 'Server error'});
+                res.status(500).json({error: err, message: 'Server error'});
             }
             else {
                 res.status(200).json({message: 'Created', data: item});

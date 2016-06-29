@@ -8,10 +8,12 @@
 
 <div class="media" ng-repeat="article in articles">
     <div class="media-body">
-        <span class="h4 media-heading">{{article.title}} </span>
+        <span class="h3 media-heading" style="color:#2b669a;">{{article.title}} </span>
         <button class="btn btn-danger btn-sm" style="float: right" ng-click="vm.toggleModal(article)"
                 data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-minus"></span></button>
-        <p style="white-space: pre-wrap;">{{article.text}}</p>
+        <br>
+        <span class="h6" style="color:#00AA00;" ng-repeat="tags in article.tag">#{{tags + " "}}</span>
+        <p style="white-space: pre-wrap;" class="">{{article.text}}</p>
     </div>
 </div>
 

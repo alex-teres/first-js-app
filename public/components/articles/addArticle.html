@@ -2,22 +2,25 @@
 	  aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
+			{{vm.article}}
 			<div class="form-group modal-header">
 				<span class="modal-title h4">New article</span>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 						aria-hidden="true">&times;</span></button>
 	</div>
-
 			<div class="form-group modal-body">
 				<input type="text" class="form-control" ng-model="vm.article.title" placeholder="Title" required>
+				<br><div id="select2-container"></div>
 				<br>
-				<textarea class="form-control" ng-model="vm.article.text" placeholder='Put some text...'
-						  rows="3" required></textarea>
 				<div class="categories">
-				<div class="category"><span class="glyphicon glyphicon-plus"></span> asdf</div>
-					<div class="subCategory"><span class="glyphicon glyphicon-plus"></span> asdf</div>
-
+					<div class="category"><span class="glyphicon glyphicon-plus"></span></div>
+					<div class="subCategory"><span class="glyphicon glyphicon-plus"></span></div>
 				</div>
+				<br>
+				<textarea class="form-control"
+						  ng-model="vm.article.text" placeholder='Put some text' rows="3" required>
+				</textarea>
+
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-primary" type="submit" ng-click="vm.addArticle()">Public</button>

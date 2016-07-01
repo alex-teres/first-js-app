@@ -8,7 +8,7 @@ module.exports = function () {
     var router = express.Router();
 
     router.get('/tree', passport.authenticate('jwt', {session: false}), function (req, res) {
-        var resp = [];
+
         Category.find().exec(function (err, items) {
 
             function rpopulate(item, cb) {
@@ -20,22 +20,14 @@ module.exports = function () {
                         });
                     });
                     async.parallel(tasks, (err, data) => {
-                        console.log('DATA', data);
                         item.children = data;
                         var tasks = [];
-
                         item.children.forEach(
-                            (_c) => {
-                                tasks.push((cb) => {rpopulate(_c, (__c) => {
-
-
-                                })})
-                            }
+                            (_c) => tasks.push((cb) => rpopulate(_c, cb))
                         );
-
-
-                        async.parallel(tasks)
-                        cb(null, item);
+                        async.parallel(tasks, (err, res) => {
+                            cb(null, item);
+                        })
                     })
                 } else  {
                     cb(null, item)
@@ -43,22 +35,35 @@ module.exports = function () {
             }
 
 
+            var tasks = [];
+            var ch = [];
+
             items.forEach((item) => {
-                rpopulate(item, (err, _i) => {
-                    console.log(err, _i);
-                    resp.push(_i);
-                })
+                item.children.forEach((_item) => {
+                    ch.push(_item);
+                });
+            });
+            items.forEach((item_i)=>{
+
+                var isRoot = true;
+                ch.forEach((item) => {
+                    if(item.toString() == item_i._id.toString()) {
+                        isRoot = false
+                    }
+                });
+
+                if (isRoot) {
+                    tasks.push((cb) => {
+                        rpopulate(item_i, cb)
+                    });
+                }
             });
 
 
-            setTimeout(() => {
-                res.status(200).json(resp);
-            }, 2000);
-
-
+            async.parallel(tasks, (err, items) => {
+                res.status(200).json(items);
+            });
         });
-
-
     });
 
     return router;

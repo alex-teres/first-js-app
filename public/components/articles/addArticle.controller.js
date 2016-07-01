@@ -9,6 +9,7 @@ class addArticleCtrl{
 
         $('#select2-container').append(select2);
 
+
         select2.select2({
             placeholder: "Tags",
             tags:true,
@@ -17,21 +18,7 @@ class addArticleCtrl{
             width: '100%'
         });
 
-
-  /*      Categories.all({populate: 'children'}).then(
-            (res) => {
-                console.log(res.data);
-                this.takeCategories = ()=> {
-                    for (let i; i < categories.length; i++) {
-                        $scope.name = categories[i].name;
-                        $scope.childName = '';
-                    }
-                };
-            },
-            (err) => {
-                console.log('error on index.js ' + err);
-            }
-        );*/
+        Categories.getTree();
 
     }
 

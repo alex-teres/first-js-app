@@ -1,6 +1,3 @@
-/**
- * Created by sasha on 22.06.16.
- */
 import Api from './api.service';
 
 
@@ -9,6 +6,7 @@ class CrudService extends Api {
     all(params) {        
         return this.$http({method: 'GET', url:`${this.url}/${this.path}`, params: params})
     }
+    
     add(items) {
         var defer = this.$q.defer();
         this.$http.post(`${this.url}/${this.path}/`, items).then(
@@ -19,6 +17,7 @@ class CrudService extends Api {
         );        
         return defer.promise;
     }
+    
     delete(article) {
         var defer = this.$q.defer();
         this.$http.delete(`${this.url}/${this.path}/${article._id}`).then(

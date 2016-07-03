@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 module.exports = function (model) {
     var router = express.Router();
 
-    router.get('/', passport.authenticate('jwt', {session: false }),  function (req, res) {
+    router.get('/', passport.authenticate('jwt', {session: false }), function (req, res) {
 
         var q = model.find(req.query);
 

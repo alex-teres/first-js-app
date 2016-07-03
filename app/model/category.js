@@ -6,7 +6,8 @@ module.exports = function() {
     var Schema = new mongoose.Schema({
         name:{
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         children: {
             type: [{ type: ObjectID, ref: 'Category'}]

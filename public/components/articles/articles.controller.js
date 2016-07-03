@@ -5,6 +5,7 @@ class ArticlesCtrl{
         this.$scope = $scope;
         this.Articles = Articles;
 
+        $scope.articles = [];
         $scope.$on('UserAuth', () => {
             Articles
                 .all({owner: Auth.getUser()._id})

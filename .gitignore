@@ -26,6 +26,7 @@ build/Release
 # Dependency directory
 node_modules
 public/assets
+/.idea
 
 # Optional npm cache directory
 .npm
@@ -39,4 +40,3 @@ public/assets
 Будет удалено .idea/node_pro.iml
 Будет удалено .idea/workspace.xml
 Будет удалено public/assets/
-Будет удалено public/img/

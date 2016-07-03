@@ -1,6 +1,7 @@
 import angular from 'angular';
 import HomeCtrl from './home.controller';
 import homeView from './home.html';
+import './home.styl';
 
 const NAME = 'home';
 

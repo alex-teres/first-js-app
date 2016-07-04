@@ -26,7 +26,7 @@ build/Release
 # Dependency directory
 node_modules
 public/assets
-/.idea
+.idea
 
 # Optional npm cache directory
 .npm

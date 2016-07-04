@@ -1,9 +1,9 @@
 class ArticlesCtrl{
 
-    constructor($scope, $rootScope,  Articles, User, Auth){
+    constructor($scope, $rootScope,  Articles, User, Auth, $compile){
         this.$rootScope = $rootScope;
         this.$scope = $scope;
-        this.Articles = Articles;
+        this.Articles = Articles;        
 
         $scope.articles = [];
         $scope.$on('UserAuth', () => {

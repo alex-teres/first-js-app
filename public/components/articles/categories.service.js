@@ -4,7 +4,7 @@ class Categories extends CrudService {
 
     get path() {return 'categories';}
 
-    getTree () {        
+    getTree () {
             return this.$http.get(`${this.url}/categories/tree`)
     }
 }

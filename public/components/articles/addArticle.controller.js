@@ -1,8 +1,7 @@
 class addArticleCtrl{
-    constructor($scope, Articles, Categories, $compile) {
+    constructor($scope, Articles, $compile) {
         this.Articles = Articles;
         this.$scope = $scope;
-        this.Categories = Categories;
         this.$compile = $compile;
 
         var select2 = $compile(('<select multiple="multiple" id="select-tags" ng-model="vm.article.tags" class="tags"></select>'))($scope);
@@ -16,9 +15,7 @@ class addArticleCtrl{
             theme: "bootstrap",
             allowClear: true,
             width: '100%'
-        });
-
-        Categories.getTree();
+        });        
 
     }
 

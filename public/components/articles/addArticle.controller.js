@@ -1,11 +1,11 @@
 class addArticleCtrl{
-    constructor($scope, Articles, $compile) {
+    constructor($scope, Articles, $compile, Categories) {
         this.Articles = Articles;
         this.$scope = $scope;
         this.$compile = $compile;
-
+            
         var select2 = $compile(('<select multiple="multiple" id="select-tags" ng-model="vm.article.tags" class="tags"></select>'))($scope);
-
+        
         $('#select2-container').append(select2);
 
 
@@ -15,7 +15,16 @@ class addArticleCtrl{
             theme: "bootstrap",
             allowClear: true,
             width: '100%'
-        });        
+        });
+
+        Categories.getTree().then(
+            (res)=>{
+                $scope.categories = {name:"Categories",children:res.data};
+            },
+            (err)=>{
+                console.log(err);
+            }
+        );        
 
     }
 

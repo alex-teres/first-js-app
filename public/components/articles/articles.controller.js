@@ -8,11 +8,11 @@ class ArticlesCtrl{
         $scope.articles = [];
         $scope.$on('UserAuth', () => {
             Articles
-                .all({owner: Auth.getUser()._id})
+                .all({owner: Auth.getUser()._id, populate:'category'})
                 .then(
                     (res) => {
                         if (res.data.length == 0) {
-                            $scope.message = "You don't have any articles";
+                            $scope.message = "You don't have any articles. Try to add one by pressing this button -->";
 
                         }
                         else {
@@ -24,9 +24,11 @@ class ArticlesCtrl{
                     }
                 );
         });
-
+        
         $scope.$on('articles:add', (event, article) => {
             $scope.articles.push(article);
+            $scope.message = "";
+            $scope.$apply();
         });
 
         $scope.$on('articles:delete', (event, article) => {
@@ -40,6 +42,10 @@ class ArticlesCtrl{
                 }
             }
             $scope.articles.splice(j,1);
+            if ($scope.articles.length == 0){
+                $scope.message = "You don't have any articles. Try to add one by pressing this button -->";
+                $scope.$apply();
+            }
         });
     }
 

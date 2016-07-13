@@ -1,0 +1,127 @@
+<div nv-file-over uploader="uploader" over-class="over" class="preOver">
+    <img class="overImage">
+</div>
+<div class="container" nv-file-drop uploader="uploader">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Home</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><!-- left navbar -->
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a style="padding: 1px; width:50px; cursor:pointer;"><img alt="avatar" ng-src="{{user.avatarUrl}}"
+                                                                              style="width:50px;"></a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<b class="caret"></b></a>
+                    <ul class="dropdown-menu" class="nav-drop">
+                        <li><a ui-sref="settings">Settings</a></li>
+                        <li><a ng-click="vm.logOut()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div id="crop"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <form novalidate>
+        <legend><h3>Personal settings</h3></legend>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4" style="text-align: center">
+                    <span style="max-width: 100px; max-height: 100px;">
+                        <img alt="avatar" ng-src="{{user.avatarUrl}}" style="margin:10px"></span><br>
+                    <input type="file" nv-file-select uploader="uploader" class="form-control" accept="image/*">
+
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    <input type="text" class="form-control" ng-model="vm.name" placeholder="Put new name">
+                    <input type="text" class="form-control" ng-model="vm.surName" placeholder="Put new surname">
+                    <input type="text" class="form-control" ng-model="vm.username" placeholder="Put new username">
+                    <button type="submit" class="btn btn-primary btn-block" ng-click="vm.changeName();">Change name
+                    </button>
+                    <div ng-class="vm.alert" ng-show="vm.nameMessage">
+
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        {{vm.nameMessage}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <legend><h4>Email settings</h4></legend>
+        <div class="row">
+            <div class="form-group col-md-4 col-lg-4 col-lg-offset-4 col-md-offset-4">
+                <input type="email" class="form-control" ng-model="email" placeholder="Put new email">
+                <button type="submit" class="btn btn-primary btn-block" ng-click="vm.changeEmail();">Change email
+                </button>
+                <div ng-class="vm.alert" ng-show="vm.emailMessage">
+
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    {{vm.emailMessage}}
+                </div>
+            </div>
+        </div>
+        <legend><h4>Password settings</h4></legend>
+        <div class="row">
+            <div class="form-group col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6">
+                <input class="form-control" type="password" ng-model="oldPassword" placeholder="Input your password">
+                <input class="form-control" type="password" ng-model="password"
+                       placeholder="Input new password">
+                <input class="form-control" type="password" ng-model="rePassword" placeholder="Repeat new password">
+                <div class="alert alert-danger" ng-show="password !== rePassword && password && rePassword">
+
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Passwords do not match.
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" ng-click="vm.changePassword();">Change
+                    password
+                </button>
+                <div ng-class="vm.alert" ng-show="vm.passwordMessage">
+
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    {{vm.passwordMessage}}
+                </div>
+            </div>
+        </div>
+        <legend><h4>Address settings</h4></legend>
+        <div class="row">
+            <div class="form-group col-lg-offset-2 col-md-offset-2 col-md-8 col-lg-8">
+                <select class="form-control" ng-model="selectedCountry"
+                        ng-options="country.name for country in countries"></select>
+                <select ng-if="selectedCountry.cities[0] !== false && selectedCountry.cities.length !== 0"
+                        class="form-control" ng-model="selectedCity"
+                        ng-options="city for city in selectedCountry.cities"></select>
+                <input type="text" ng-model="vm.address" class="form-control" placeholder="Address">
+                <input type="number" ng-model="vm.zip" class="form-control" min=0 placeholder="ZIP">
+                <button type="submit" class="btn btn-primary btn-block" ng-click="vm.changeAddress();">Change address
+                </button>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5435417.430061835!2d26.685938705050646!3d48.30261261666718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d1d9c154700e8f%3A0x1068488f64010!2z0KPQutGA0LDQuNC90LA!5e0!3m2!1sru!2sua!4v1467885673108"
+                        frameborder="0" style="border:0; width:100%;height: 300px;" allowfullscreen></iframe>
+
+            </div>
+        </div>
+    </form>
+
+
+</div>

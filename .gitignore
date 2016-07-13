@@ -28,6 +28,7 @@ node_modules
 public/assets
 .idea
 
+
 # Optional npm cache directory
 .npm
 

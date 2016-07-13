@@ -1,6 +1,9 @@
-import Api from '../api/api.service';
+import CrudService from '../api/crud.service';
 
-class User extends Api {
+class User extends CrudService {
+
+    get path() {return 'users';}
+
     me() {
         var deferred = this.$q.defer();
 
@@ -14,6 +17,7 @@ class User extends Api {
 
         return deferred.promise;
     }
+
 }
 
 export default User;

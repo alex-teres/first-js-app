@@ -1,6 +1,9 @@
-<span class="h5 categories"><span ng-class="glyphClass" ng-click="vm.changeClass();"></span><a class="btn btn-default btn-xs" style="border: 0">{{vm.family.name}}</a></span>
+<span class="h5 categories">
+    <span ng-class="glyphClass" ng-click="vm.changeClass();"></span>
+    <a class="btn btn-default btn-sm categoryButton" ng-click="vm.categorySelected()">{{vm.family.name}}</a>
+</span>
 <ul>
-<li ng-repeat="child in vm.family.children" ng-class="class">
-    <categories family="child"></categories>
-</li>
+    <li ng-repeat="child in vm.family.children" ng-class="class">
+        <categories family="child"></categories>
+    </li>
 </ul>

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
 	<nav class="navbar navbar-default" role="navigation">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -14,13 +14,12 @@
 				<ul class="nav navbar-nav"><!-- left navbar -->
 
 				</ul>
-				<ul class="nav navbar-nav navbar-right"><!-- сделай что бы картинка и выпадающий список были в ровень -->
-					<li><a ui-sref="profile" style="padding: 1px; width:50px;  cursor:pointer;"><img alt="avatar" ng-src="{{user.avatarUrl}}" style="width:50px;"></a></li>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a style="padding: 1px; width:50px;"><img alt="avatar" ng-src="{{user.avatarUrl}}" style="width:50px;"></a></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<b class="caret"></b></a>
 						<ul class="dropdown-menu" class="nav-drop">
-							<li><a>Settings</a></li>
-							<!--<li><a ui-sref="">Settings</a></li>-->
+							<li><a ui-sref="settings">Settings</a></li>
 							<li><a ng-click="vm.logOut()">Logout</a></li>
 						</ul>
 					</li>
@@ -35,4 +34,4 @@
 		</div>
 		<div class="col-md-2 col-sm-2"></div>
 		</div>
-</div>
+</div><!--ng-if="user.avatarUrl == ''" ng-src=""-->

@@ -4,6 +4,7 @@ class Api {
     
 
     constructor($http, $q, $state, $rootScope) {
+        
         this.$http = $http;
         this.$q = $q;
         this.$state = $state;

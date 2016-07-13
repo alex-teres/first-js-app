@@ -20,12 +20,15 @@ mongoose.connect(conf.dataBase);
 app.use(bodyParser());
 
 app.use(function (req, res, next) {
-
 	res.set('Access-Control-Allow-Origin','*');
 	res.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
 	res.set("Access-Control-Allow-Headers", "Authorization, Content-Type");
 
-	next();
+	if ('OPTIONS' == req.method) {
+		res.send(200);
+	} else {
+		next();
+	}
 });
 
 app.get('/', function(req, res) {
@@ -40,6 +43,11 @@ app.use('/articles', crudRouter(Article));
 app.use('/users', crudRouter(User));
 app.use('/userGroups', crudRouter(userGroups));
 app.use('/categories', crudRouter(Category));
+
+app.use('/uploads', express.static('uploads'));
+app.use('/json', express.static('json'));
+
+
 
 
 

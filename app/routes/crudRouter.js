@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 module.exports = function (model) {
     var router = express.Router();
 
-    router.get('/', passport.authenticate('jwt', {session: false }), function (req, res) {
+    router.get('/', /*passport.authenticate('jwt', {session: false }),*/ function (req, res) {
 
         var q = model.find(req.query);
 
@@ -34,10 +34,10 @@ module.exports = function (model) {
             } else {
                 res.status(500).json({error: 'Server error'});
             }
-        }).select('-password');
+        });
     });
 
-    router.post('/', passport.authenticate('jwt', {session: false}), function (req, res) {
+    router.post('/',/* passport.authenticate('jwt', {session: false}),*/ function (req, res) {
         var post = new model(req.body);
 
 
@@ -48,10 +48,10 @@ module.exports = function (model) {
             else {
                 res.status(200).json({message: 'Created', data: item});
             }
-        })/*.select('-role')*/;
+        });
     });
 
-    router.put('/:id',  passport.authenticate('jwt', { session: false }), function (req, res) {
+    router.put('/:id', /* passport.authenticate('jwt', { session: false }),*/ function (req, res) {
         model.findById(req.params.id, function (err, items) {
             if (!items) {
                 res.status(404).json({error: 'Not found'});
@@ -65,7 +65,7 @@ module.exports = function (model) {
                 }
             })
 
-        })/*.select('-password -role -username');*/;
+        });
     });
 
     router.delete('/:id', function (req, res) {

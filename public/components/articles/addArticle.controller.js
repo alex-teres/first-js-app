@@ -1,4 +1,5 @@
 class addArticleCtrl{
+   
     constructor($scope, Articles, $compile, Categories) {
         this.Articles = Articles;
         this.$scope = $scope;
@@ -8,6 +9,7 @@ class addArticleCtrl{
         
         $('#select2-container').append(select2);
 
+        this.article = {};
 
         select2.select2({
             placeholder: "Tags",
@@ -16,7 +18,6 @@ class addArticleCtrl{
             allowClear: true,
             width: '100%'
         });
-
         Categories.getTree().then(
             (res)=>{
                 $scope.categories = {name:"Categories",children:res.data};
@@ -24,14 +25,18 @@ class addArticleCtrl{
             (err)=>{
                 console.log(err);
             }
-        );        
+        );
+
+        $scope.$on('category:select',(event,category)=>{
+            this.article.category = category;
+        });
 
     }
 
 
 
     addArticle() {
-        this.Articles.add({title: this.article.title, text: this.article.text, tag:this.article.tags})
+        this.Articles.add({title: this.article.title, text: this.article.text, tag:this.article.tags, category:this.article.category})
             .then(
                 (res) => {
                     $('.modal').modal('hide');

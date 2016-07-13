@@ -7,6 +7,10 @@ class categoriesController {
 
         $scope.class = "hide";
         $scope.glyphClass = "glyphicon glyphicon-plus";
+/*        if (this.ch.children == 0){
+            this.$scope.glyphClass = "";
+        }*/
+
     }
 
     changeClass() {
@@ -19,6 +23,10 @@ class categoriesController {
             this.$scope.class = "children";
             this.$scope.glyphClass = "glyphicon glyphicon-minus";
         }
+
+    }
+    categorySelected() {
+        this.$scope.$emit('category:select',this.family);
     }
 }
 export default categoriesController;

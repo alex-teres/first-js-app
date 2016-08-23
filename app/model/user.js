@@ -27,12 +27,12 @@ var Schema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true
-	},
-	role:{
-		type:ObjectId,
-		default:"5751687a63d9c83e1e1b8c4a",
-		ref:'userGroups'
 	}
+	// role:{
+	// 	type:ObjectId,
+	// 	default:"5751687a63d9c83e1e1b8c4a",
+	// 	ref:'userGroups'
+	// }
 });
 
 Schema.post('save',function (doc) {

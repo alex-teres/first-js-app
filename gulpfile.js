@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
    // bs = require('browser-sync').create(),
-    server = require( 'gulp-develop-server' ),
+    server = require('gulp-develop-server'),
     webpack = require('webpack'),
     WebpackDevServer = require("webpack-dev-server"),
     BrowserSyncPlugin = require('browser-sync-webpack-plugin'),
@@ -25,6 +25,7 @@ gulp.task("webpack-dev-server", function() {
             }
         )
     );
+
     new WebpackDevServer(webpack(myConfig), {
         publicPath: '/assets/',
         stats: {

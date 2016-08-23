@@ -1,10 +1,9 @@
 class Api {
     get url() 
-    { return '/'};
+    { return ''};
     
 
     constructor($http, $q, $state, $rootScope) {
-        
         this.$http = $http;
         this.$q = $q;
         this.$state = $state;

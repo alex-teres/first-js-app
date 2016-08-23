@@ -1,6 +1,6 @@
 class Api {
     get url() 
-    { return 'http://localhost:8080'};
+    { return '/'};
     
 
     constructor($http, $q, $state, $rootScope) {

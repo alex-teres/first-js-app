@@ -1,6 +1,6 @@
 class Api {
     get url() 
-    { return ''};
+    { return __dirname+"/#"};
     
 
     constructor($http, $q, $state, $rootScope) {

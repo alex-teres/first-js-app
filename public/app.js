@@ -8,7 +8,7 @@ import articles from './components/articles';
 import user from './components/user';
 import userSettings from './components/user.settings';
 
-import 'nestedSortable';
+// import 'nestedSortable';
 import '../node_modules/select2/dist/js/select2.full.min';
 import '../node_modules/select2/dist/css/select2.min.css';
 import '../node_modules/bootstrap/less/bootstrap.less';

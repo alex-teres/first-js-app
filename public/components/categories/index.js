@@ -19,6 +19,7 @@ function categoryDirective(RecursionHelper) {
         }
     }
 }
+
 angular.module(NAME, [])
     .directive(NAME, ['RecursionHelper', categoryDirective])
     .service('Categories', ['$http', '$q', '$state', '$rootScope', Categories])

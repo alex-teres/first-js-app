@@ -31,7 +31,6 @@ function addArticleDirective() {
     };
 }
 
-
 angular
     .module(NAME, [Categories])
     .directive('articles', articlesDirective)

@@ -1,6 +1,6 @@
 class Api {
     get url() 
-    { return __dirname};
+    { return '/api' };
     
 
     constructor($http, $q, $state, $rootScope) {

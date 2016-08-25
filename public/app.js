@@ -17,8 +17,6 @@ import '../node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css';
 import 'croppie';
 import '../node_modules/croppie/croppie.css';
 
-
-
 angular
     .module('myApp', [
         uiRouter,

@@ -54,6 +54,4 @@ angular.module(NAME, [])
             }
         };
     }]);
-
-
 export default NAME;

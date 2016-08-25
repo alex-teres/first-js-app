@@ -48,4 +48,5 @@ angular
             })
     });
 
+
 export default NAME;

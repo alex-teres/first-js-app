@@ -1,7 +1,6 @@
 class Api {
     get url() 
     { return '/api' };
-    
 
     constructor($http, $q, $state, $rootScope) {
         this.$http = $http;

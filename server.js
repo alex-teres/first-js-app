@@ -47,8 +47,4 @@ app.use('/api/categories', crudRouter(Category));
 app.use('/api/uploads', express.static('uploads'));
 app.use('/api/json', express.static('json'));
 
-
-
-
-
 app.listen(process.env.PORT || 8080);

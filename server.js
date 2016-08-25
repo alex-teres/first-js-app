@@ -31,21 +31,21 @@ app.use(function (req, res, next) {
 	}
 });
 
-app.get('/', function(req, res) {
+app.get('/api', function(req, res) {
 	res.status(200).json({message: 'Server running'});
 });
-app.use('/auth',auth);
-app.use('/users', users);
-app.use('/articles', articles);
-app.use('/categories', categories);
+app.use('/api/auth',auth);
+app.use('/api/users', users);
+app.use('/api/articles', articles);
+app.use('/api/categories', categories);
 
-app.use('/articles', crudRouter(Article));
-app.use('/users', crudRouter(User));
-app.use('/userGroups', crudRouter(userGroups));
-app.use('/categories', crudRouter(Category));
+app.use('/api/articles', crudRouter(Article));
+app.use('/api/users', crudRouter(User));
+app.use('/api/userGroups', crudRouter(userGroups));
+app.use('/api/categories', crudRouter(Category));
 
-app.use('/uploads', express.static('uploads'));
-app.use('/json', express.static('json'));
+app.use('/api/uploads', express.static('uploads'));
+app.use('/api/json', express.static('json'));
 
 
 

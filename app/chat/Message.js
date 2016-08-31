@@ -11,6 +11,9 @@ module.exports = function(app) {
         owner:{
             type:ObjectID,
             ref: 'user'
+        },
+        date:{
+            type: Date
         }
     });
 

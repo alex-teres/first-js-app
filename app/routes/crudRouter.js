@@ -1,12 +1,41 @@
 var express = require('express');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
+var _  = require('lodash');
 
 
-module.exports = function (model) {
+module.exports = function (model, conf) {
     var router = express.Router();
 
-    router.get('/', /*passport.authenticate('jwt', {session: false }),*/ function (req, res) {
+    var noGet = _.findIndex(conf.noAuth, function (noAuthRoute) {return noAuthRoute == 'get'}) > -1;
+    var noGetId = _.findIndex(conf.noAuth, function (noAuthRoute) {return noAuthRoute == 'getId'}) > -1;
+    var noPost = _.findIndex(conf.noAuth, function (noAuthRoute) {return noAuthRoute == 'post'}) > -1;
+    var noPut = _.findIndex(conf.noAuth, function (noAuthRoute) {return noAuthRoute == 'put'}) > -1;
+    var noDelete = _.findIndex(conf.noAuth, function (noAuthRoute) {return noAuthRoute == 'delete'}) > -1;
+
+
+    if (!noGet) {
+        //console.log('Adding Auth');
+        router.get('/', passport.authenticate('jwt', {session: false }))
+    }
+    if (!noGetId) {
+        //console.log('Adding Auth');
+        router.get('/:id', passport.authenticate('jwt', {session: false }))
+    }
+    if (!noPost) {
+        //console.log('Adding Auth');
+        router.post('/:id', passport.authenticate('jwt', {session: false }))
+    }
+    if (!noPut) {
+        //console.log('Adding Auth');
+        router.put('/:id', passport.authenticate('jwt', {session: false }))
+    }
+    if (!noDelete) {
+        //console.log('Adding Auth');
+        router.delete('/:id', passport.authenticate('jwt', {session: false }))
+    }
+
+    router.get('/', function (req, res) {
 
         var q = model.find(req.query);
 
@@ -24,7 +53,7 @@ module.exports = function (model) {
 
     });
 
-    router.get('/:id', passport.authenticate('jwt', {session: false }), function (req, res) {
+    router.get('/:id', function (req, res) {
         model.findById(req.params.id, function (err, items) {
             if (!items) {
                 res.status(404).json({error: 'Not found'});
@@ -37,7 +66,7 @@ module.exports = function (model) {
         });
     });
 
-    router.post('/', passport.authenticate('jwt', {session: false}), function (req, res) {
+    router.post('/', function (req, res) {
         var post = new model(req.body);
 
 
@@ -51,7 +80,7 @@ module.exports = function (model) {
         });
     });
 
-    router.put('/:id',  passport.authenticate('jwt', { session: false }), function (req, res) {
+    router.put('/:id',  function (req, res) {
         model.findById(req.params.id, function (err, items) {
             if (!items) {
                 res.status(404).json({error: 'Not found'});

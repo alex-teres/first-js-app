@@ -47,10 +47,10 @@ app.use('/api/users', users);
 app.use('/api/articles', articles);
 app.use('/api/categories', categories);
 
-app.use('/api/articles', crudRouter(Article));
-app.use('/api/users', crudRouter(User));
-app.use('/api/userGroups', crudRouter(userGroups));
-app.use('/api/categories', crudRouter(Category));
+app.use('/api/articles', crudRouter(Article, {noAuth: []}));
+app.use('/api/users', crudRouter(User, {noAuth: ['get','post']}));
+app.use('/api/userGroups', crudRouter(userGroups, {noAuth: []}));
+app.use('/api/categories', crudRouter(Category, {noAuth: []}));
 
 app.use('/api/uploads', express.static('uploads'));
 app.use('/api/json', express.static('json'));

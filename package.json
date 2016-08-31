@@ -19,6 +19,7 @@
     "jquery": "^2.2.4",
     "jquery-ui": "^1.10.5",
     "jsonwebtoken": "^5.7.0",
+    "lodash": "^4.15.0",
     "mongoose": "^4.4.7",
     "multer": "^1.1.0",
     "paper": "^0.10.2",

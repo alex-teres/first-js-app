@@ -5,6 +5,7 @@ class chatCtrl{
 
         this.Chat = Chat;
         this.Home = Home;
+        this.$scope = $scope;
 
         User.me().then(
             function (res) {
@@ -31,9 +32,8 @@ class chatCtrl{
         socket.on('messageOut', (msg)=>{
             this.messages.push(msg);
             $scope.$apply();
-            console.log(this.messages);
          });
-        this._$scope = $scope;
+
     }
     sendMessage(text){
         var nowDate = new Date();
@@ -45,9 +45,9 @@ class chatCtrl{
 
             this.Chat.add(message).then(
                 ()=>{
-                    message.owner = this._$scope.user;
+                    message.owner = this.$scope.user;
                     socket.emit('messageIn',message);
-                    this._$scope.newMessage = "";
+                    this.$scope.newMessage = "";
                 },
                 (err)=>{
                     console.log(err);

@@ -14,8 +14,8 @@ module.exports = function (app) {
     });
 
     io.on('disconnect', function (socket) {
-        socket.on('leaveIn',user);
-        io.emit('leaveOut',user+' leave chat');
+        console.log(socket);
+        io.emit('leave');
     });
 
 

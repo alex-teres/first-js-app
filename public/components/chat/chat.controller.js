@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-var socket = io('localhost:8888');
+var socket = io('sasha-blog.test.jsninjas.net:8888');
 class chatCtrl{
     constructor($scope, Chat,Home,User, Auth, $timeout, $compile) {
         var chat = $("#listOfMessages")[0];

@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-var socket = io('//');
+var socket = io('http://localhost:8888/chat');
 class chatCtrl{
     constructor($scope, Chat,Home,User, Auth) {
 

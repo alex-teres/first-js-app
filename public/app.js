@@ -42,7 +42,7 @@ angular
     })
     .run(['$state', function ($state) {
         if (!localStorage.getItem('Authorization')) {
-            // $state.go('login');
+            $state.go('login');
         }
     }])
     .service('userInterceptor', function () {

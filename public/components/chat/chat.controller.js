@@ -1,21 +1,21 @@
 import io from 'socket.io-client';
-var socket = io('sasha-blog.test.jsninjas.net:8888');
+var socket = io('localhost:8888');
 class chatCtrl{
-    constructor($scope, Chat,Home,User, Auth) {
-
+    constructor($scope, Chat,Home,User, Auth, $timeout, $compile) {
+        var chat = $("#listOfMessages")[0];
         this.Chat = Chat;
         this.Home = Home;
         this.$scope = $scope;
 
         User.me().then(
-            function (res) {
+             (res)=> {
                 $scope.user = res;
                 Auth.setUser(res);
                 if ($scope.user.avatarUrl == undefined) {
                     $scope.user.avatarUrl = 'images/avatar.jpg'
                 }
             },
-            function (x) {
+             (x)=> {
                 $scope.errMessage = "Something wrong";
                 console.log(x);
             });
@@ -23,6 +23,9 @@ class chatCtrl{
         Chat.all({populate:'owner'}).then(
             (res)=>{
                 this.messages = res.data;
+                $timeout(()=>{
+                    chat.scrollTop = chat.scrollHeight;
+                },500);
             },
             (err)=>{
                 console.log(err);
@@ -32,6 +35,7 @@ class chatCtrl{
         socket.on('messageOut', (msg)=>{
             this.messages.push(msg);
             $scope.$apply();
+                chat.scrollTop = chat.scrollHeight;
          });
 
     }
@@ -57,6 +61,12 @@ class chatCtrl{
         } else {
             console.log('Message is empty');
         }
+    }
+    enter(event, text){
+            var keyCode = event.which || event.keyCode;
+            if (keyCode === 13) {
+                this.sendMessage(text);
+            }
     }
 
 }

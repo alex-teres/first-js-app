@@ -20,7 +20,7 @@ function chatDirective() {
 }
 angular
     .module(NAME, [])
-    .controller('chatCtrl', ['$scope', 'Chat', 'Home', 'User', 'Auth', chatCtrl])
+    .controller('chatCtrl', ['$scope', 'Chat', 'Home', 'User', 'Auth', '$timeout', '$compile', chatCtrl])
     .directive('chat', chatDirective)
     .service('Chat', ['$http', '$q', '$state', '$rootScope', Chat])
     .config(function ($stateProvider) {

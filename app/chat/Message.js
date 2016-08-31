@@ -18,7 +18,6 @@ module.exports = function(app) {
     });
 
     Schema.pre('save', function(next) {
-        console.log(app.user);
         this.owner = app.user.id;
         User.update({_id: app.user._id},{$pushAll: {article:[this._id]}}, function(err){
             if(err){

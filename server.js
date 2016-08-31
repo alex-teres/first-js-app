@@ -31,6 +31,14 @@ app.use(function (req, res, next) {
 	}
 });
 
+app.listen(process.env.PORT || 8080);
+
+require('./app/chat')(app);
+
+app.get('/', function (req, res) {
+	res.json({ok:'ok'});
+});
+
 app.get('/api', function(req, res) {
 	res.status(200).json({message: 'Server running'});
 });
@@ -47,4 +55,4 @@ app.use('/api/categories', crudRouter(Category));
 app.use('/api/uploads', express.static('uploads'));
 app.use('/api/json', express.static('json'));
 
-app.listen(process.env.PORT || 8080);
+

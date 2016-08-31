@@ -31,6 +31,12 @@ gulp.task("webpack-dev-server", function() {
         stats: {
             colors: true
         },
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8080',
+                secure: false
+            }
+        },
         contentBase: __dirname + '/public'
     }).listen(8000, "localhost");
 });

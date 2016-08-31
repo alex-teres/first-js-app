@@ -37,7 +37,7 @@ module.exports = function (model) {
         });
     });
 
-    router.post('/',/* passport.authenticate('jwt', {session: false}),*/ function (req, res) {
+    router.post('/', passport.authenticate('jwt', {session: false}), function (req, res) {
         var post = new model(req.body);
 
 
@@ -51,7 +51,7 @@ module.exports = function (model) {
         });
     });
 
-    router.put('/:id', /* passport.authenticate('jwt', { session: false }),*/ function (req, res) {
+    router.put('/:id',  passport.authenticate('jwt', { session: false }), function (req, res) {
         model.findById(req.params.id, function (err, items) {
             if (!items) {
                 res.status(404).json({error: 'Not found'});

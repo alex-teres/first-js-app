@@ -1,6 +1,7 @@
 import angular from 'angular';
 import HomeCtrl from './home.controller';
 import homeView from './home.html';
+import Home from './home.service';
 import './home.styl';
 
 const NAME = 'home';
@@ -16,8 +17,9 @@ const NAME = 'home';
     }
     angular
         .module(NAME, [])
-        .controller('homeCtrl', ['$scope', '$state', 'User', 'Auth', HomeCtrl])
+        .controller('homeCtrl', ['$scope', 'User', 'Auth', 'Home', HomeCtrl])
         .directive('home', homeDirective)
+        .service('Home', ['$state', Home])
         .config(function ($stateProvider) {
             $stateProvider
                 .state('home', {

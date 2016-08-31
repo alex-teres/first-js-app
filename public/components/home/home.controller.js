@@ -1,8 +1,7 @@
 class HomeCtrl{
-    constructor($scope, $state, User, Auth){
+    constructor($scope, User, Auth, Home){
 
-        this.$state = $state;
-
+        this.Home = Home;
         User.me().then(
             function (res) {
                 $scope.user = res;
@@ -16,13 +15,5 @@ class HomeCtrl{
                 console.log(x);
             });
     };
-    
-    logOut (){
-        localStorage.removeItem('Authorization');
-        this.$state.go('login');
-    };
-
-
-
 }
 export default HomeCtrl;

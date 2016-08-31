@@ -12,8 +12,8 @@ class Auth extends Api {
         return this.$http.post(`${this.url}/auth/login`, {username: username, password: password})
     }
 
-    signUp(username, password, email) {
-        return this.$http.post(`${this.url}/users`, {username: username, password: password, email: email})
+    signUp(params) {
+        return this.$http.post(`${this.url}/users`, params)
     }
 
     setUser(user) {

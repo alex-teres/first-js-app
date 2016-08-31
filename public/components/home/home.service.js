@@ -1,7 +1,13 @@
-import Api from '../api/api.service';
 
-class Home extends Api {
 
+class Home {
+    constructor($state){
+        this.$state = $state;
+    }
+    logOut (){
+        localStorage.removeItem('Authorization');
+        this.$state.go('login');
+    };
 }
 
 export default Home;

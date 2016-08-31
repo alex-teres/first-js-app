@@ -13,7 +13,8 @@ function loginDirective() {
         restrict: 'E',
         scope: {},
         template: loginView,
-        controller: 'authLogin'
+        controller: 'authLogin as vm',
+        bindToController:true
     }
 }
 
@@ -22,7 +23,9 @@ function signUpDirective() {
         restrict: 'E',
         scope: {},
         template: signUpView,
-        controller: 'authSignUp'
+        controller: 'authSignUp as vm',
+        bindToController:true
+
     }
 }
 
@@ -33,7 +36,7 @@ angular
     .controller('authLogin', ['$scope', '$state', 'Auth', AuthLoginController])
     
     .directive('signUp', signUpDirective)
-    .controller('authSignUp', ['$scope', '$state', 'Auth', AuthSignUpController])
+    .controller('authSignUp', ['$timeout', '$scope', '$state', 'Auth', AuthSignUpController])
     
     .service('Auth', ['$http', '$q', '$rootScope', Auth])
     .config(function ($stateProvider) {

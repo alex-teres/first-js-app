@@ -26,16 +26,6 @@ class Login {
                     }
                 );
         };
-
-        /*   Auth.signUp($scope.user.username, $scope.user.password, $scope.user.email)
-         .then(
-         function (res) {
-         console.log(res);
-         },
-         function (err) {
-         console.log(err);
-         }
-         );*/
     }
 }
 

@@ -4,19 +4,22 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Username</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Input username..." required>
+            <input type="text" class="form-control" name="username" ng-model="username" placeholder="Input username..."
+                   required ng-blur='vm.checkValue(username);'>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Email</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" name="email" ng-model="user.email" placeholder="Input email..." required>
+            <input type="email" class="form-control" name="email" ng-model="email" placeholder="Input email..."
+                   required ng-blur='vm.checkValue(email);'>
         </div>
     </div>
     <div class="form-group">
         <label  class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Input password..." required>
+            <input type="password" class="form-control" name="password" ng-model="password"
+                   placeholder="Input password..." required ng-blur='vm.checkValue(password);'>
         </div>
     </div>
     <div class="form-group">
@@ -24,22 +27,12 @@
             <input type="password" class="form-control" ng-model="_password" placeholder="Repeat password..." required>
         </div>
     </div>
-    <div class="alert alert-danger" ng-show="signUpForm.username.$error.required">
+    <div class="alert alert-danger" ng-show="vm.error">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
-        you forget username
+        {{vm.error}}
     </div>
-    <div class="alert alert-danger" ng-show="signUpForm.email.$error.required">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        you forget email
-    </div>
-    <div class="alert alert-danger" ng-show="signUpForm.password.$error.required">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        you forget password
-    </div>
-    <div class="alert alert-danger" ng-show="user.password !== _password">
+    <div class="alert alert-danger" ng-show="password !== _password">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
         Passwords do not match.
@@ -49,9 +42,11 @@
             <label>All fields are required</label>
         </div>
     </div>
-    <div class="form-group" style="margin-top:30px;">
+    <div class="form-group" style="margin-top:30px;" ng-show="!vm.error && username && password && email">
         <div class="col-sm-offset-1 col-sm-11">
-            <button type="submit" class="btn btn-success btn-lg  btn-block"  ng-click="signUp()">Sign up</button>
+            <button type="submit" class="btn btn-success btn-lg  btn-block"
+                    ng-click="vm.Auth.signUp({username:username,password:password,email:email})">Sign up
+            </button>
         </div>
     </div>
 </form>

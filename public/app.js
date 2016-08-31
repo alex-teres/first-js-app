@@ -7,8 +7,8 @@ import home from './components/home';
 import articles from './components/articles';
 import user from './components/user';
 import userSettings from './components/user.settings';
-
-// import 'nestedSortable';
+import chat from './components/chat';
+import pdf from './components/pdf';
 import '../node_modules/select2/dist/js/select2.full.min';
 import '../node_modules/select2/dist/css/select2.min.css';
 import '../node_modules/bootstrap/less/bootstrap.less';
@@ -16,6 +16,7 @@ import 'bootstrap';
 import '../node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css';
 import 'croppie';
 import '../node_modules/croppie/croppie.css';
+// import 'nestedSortable';
 
 angular
     .module('myApp', [
@@ -24,7 +25,9 @@ angular
         home,
         articles,
         user,
-        userSettings
+        userSettings,
+        chat,
+        pdf
         ])
     .directive('app', function () {
         return {
@@ -39,7 +42,7 @@ angular
     })
     .run(['$state', function ($state) {
         if (!localStorage.getItem('Authorization')) {
-            $state.go('login');
+            // $state.go('login');
         }
     }])
     .service('userInterceptor', function () {

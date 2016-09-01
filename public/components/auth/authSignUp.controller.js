@@ -13,15 +13,21 @@ class AuthSignUp {
         }
     }
     signUp(username, password, email){
+        console.log(username, password, email);
         this.Auth.signUp({username:username,password:password,email:email}).then(
             (res)=>{
-                this.$state.go('login');
+                this.message = "Register done";
+                this.$timeout(()=>{
+                    delete this.message;
+                    this.$state.go('login');
+                },2000);
             },
             (err)=>{
                 console.log(err);
                 this.error = err.statusText + '. ' + 'Try a bit later';
                 this.$timeout(()=>{
-                    delete this.error
+                    delete this.error;
+                    this.$state.go('login');
                 },3000);
             }
         );

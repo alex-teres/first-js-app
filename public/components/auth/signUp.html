@@ -29,8 +29,12 @@
     </div>
     <div class="alert alert-danger" ng-show="vm.error">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
         {{vm.error}}
+    </div>
+    <div class="alert alert-success" ng-show="vm.message">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{vm.message}}
     </div>
     <div class="alert alert-danger" ng-show="password !== _password">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -45,7 +49,7 @@
     <div class="form-group" style="margin-top:30px;" ng-show="!vm.error">
         <div class="col-sm-offset-1 col-sm-11">
             <button type="submit" class="btn btn-success btn-lg  btn-block"
-                    ng-click="vm.signUp();">Sign up
+                    ng-click="vm.signUp(username, password, email);">Sign up
             </button>
         </div>
     </div>

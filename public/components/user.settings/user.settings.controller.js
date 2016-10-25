@@ -1,10 +1,19 @@
 class settingsController {
-    constructor($scope, $state, User, userSettings, $timeout, Auth, FileUploader) {
+    constructor($scope, $state, User, userSettings, $timeout, Auth, FileUploader, $element) {
         this.$state = $state;
         this.$scope = $scope;
         this.$timeout = $timeout;
         this.User = User;
         this.Auth = Auth;
+        $element.find('input[type="file"]').on('change', function (e) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '/api/upload/', true);
+            // xhr.setRequestHeader("Content-Type","multipart/form-data");
+            var formData = new FormData();
+            formData.append("thefile", this.files[0]);
+            formData.append("dsafkjsdhf", 'dsgdfsh');
+            xhr.send(formData);
+        });
 
         $('#crop').croppie({
             enableExif: true,

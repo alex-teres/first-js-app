@@ -20,7 +20,7 @@ function userSettingsDirective() {
 
 angular
     .module(NAME, ['angularFileUpload'])
-    .controller('settingsCtrl', ['$scope', '$state', 'User', 'userSettings', '$timeout', 'Auth', 'FileUploader', userSettingsCtrl])
+    .controller('settingsCtrl', ['$scope', '$state', 'User', 'userSettings', '$timeout', 'Auth', 'FileUploader','$element', userSettingsCtrl])
     .directive('settings', userSettingsDirective)
     .service('userSettings', ['$http', 'User', userSettings])
     .config(function ($stateProvider) {

@@ -59,13 +59,3 @@ app.use('/api/categories', crudRouter(Category, {noAuth: []}));
 
 app.use('/api/uploads', express.static('uploads'));
 app.use('/api/json', express.static('json'));
-
-app.post('/api/upload',multipartMiddleware, function(req, resp) {
-	console.log(req.body, req.files.thefile);
-
-	fs.createReadStream(req.files.thefile.path).pipe(fs.createWriteStream(req.files.thefile.name));
-	resp.json({status: 'ok'});
-	// don't forget to delete all req.files when done
-});
-
-

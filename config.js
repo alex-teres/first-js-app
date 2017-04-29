@@ -1,4 +1,4 @@
 module.exports = {
     jwtSecretKey: 'jsfhdkjsfgh',
-    dataBase:'mongodb://localhost/test'
+    dataBase:'mongodb://localhost/node-pro'
 };

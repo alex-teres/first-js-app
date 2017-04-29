@@ -34,16 +34,16 @@
             </div>
         </nav>
     <div class="chat">
-        <label class="h2"><strong>Chat for true ninjas</strong></label>
+        <label class="h2"><strong>Chat</strong></label>
         <ul id="listOfMessages">
             <li ng-repeat="message in vm.messages| orderBy:date:reverse">{{message.owner.username}}:<div class="alert alert-info">{{message.text}}</div></li>
         </ul>
     </div>
     <div class="input-group messageInput">
-        <input type="text" class="form-control" ng-model="newMessage" placeholder="Write your haiku..."
+        <input type="text" class="form-control" ng-model="newMessage" placeholder="Write your message..."
                ng-keypress="vm.enter($event, newMessage)">
         <span class="input-group-btn">
-       <button class="btn btn-primary" ng-click="vm.sendMessage(newMessage);">Throw Shuriken</button>
+       <button class="btn btn-primary" ng-click="vm.sendMessage(newMessage);">Send</button>
     </span>
     </div>
 </div>

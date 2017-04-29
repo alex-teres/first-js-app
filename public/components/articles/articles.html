@@ -1,36 +1,63 @@
-<span class="h2">Articles</span>
-<button type="button" class="btn btn-success btn-sm" style="float: right" data-toggle="modal"
-        data-target=".bs-example-modal-lg">
-    <span class="glyphicon glyphicon-plus"></span>
+<button type="button" class="btn btn-default btn-sm btn-block" data-toggle="modal"
+        data-target="#createArticle">
+    Add note
 </button>
 <br>
 {{message}}
 
-<div class="media" ng-repeat="article in articles">
-    <div class="media-body">
-        <span class="h3 media-heading" style="color:#2b669a;">{{article.title}} </span>
-        <button class="btn btn-danger btn-sm" style="float: right" ng-click="vm.toggleModal(article)"
-                data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-minus"></span></button>
-        <br>
-        <span class="h6" style="color:#00AA00;" ng-repeat="tags in article.tag">#{{tags + " "}}</span>
-        <p style="white-space: pre-wrap;" class="">{{article.text}}</p>
-        <span class="h5" style="float: right">Category:<span style="color:dodgerblue;">{{article.category.name}}</span></span>
+<div class="media" ng-repeat="article in articles | orderBy:'-article.date'">
+    <div class="media-body" style="position:relative;background: {{article.color}}; padding: 50px;">
+        <div class="btn-group" style="position: absolute; top:0; right: 0;">
+            <button class="btn btn-link btn-sm" ng-click="vm.toggleModal(article,'edit')">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            <button class="btn btn-link btn-sm" ng-click="vm.toggleModal(article,'remove')">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+        <span class="h2 media-heading" style="margin-bottom: 50px;display: block">{{article.title}}</span>
+        <p style="white-space: pre-wrap;text-align: justify">{{article.text}}
+        </p>
+        <span class="h6" style="color:dodgerblue;" ng-repeat="tags in article.tag">#{{tags + " "}}</span>
+        <span class="h5" style="float: right">Category:<span style="color:red;">{{article.category.name}}</span></span>
+        <p class="h6">{{article.date | date:'medium'}}</p>
     </div>
 </div>
-
-
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
+<!-- MODAL to DELETE-->
+<div class="modal fade bs-example-modal-sm" id="deleteArticle" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="form-group modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
             <div class="form-group modal-body">
-                <span class="h4">Are you sure you want to delete an article with title "{{vm.article.title}}"?</span>
+                <span class="h4" >Are you sure you want to delete an article with title "{{vm.article.title}}"?</span>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" ng-click="vm.deleteArticle()">Ok</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="editArticle" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="form-group modal-header">
+                <span class="modal-title h4">Edit note</span>
+            </div>
+            <div class="form-group modal-body">
+                <input type="text" class="form-control" ng-model="vm.newArticle.title" placeholder="Title" required>
+                <br><div id="select2-container-edit"></div>
+                <br>
+                <textarea class="form-control"
+                          ng-model="vm.newArticle.text" placeholder='Put some text' rows="3" required>
+				</textarea>
+                <br>
+                <div class="categories">
+                    Categories:<categories family="categories"></categories>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit" ng-click="vm.editArticle()">Update</button>
                 <button class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>

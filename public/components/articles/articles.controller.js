@@ -3,18 +3,16 @@ class ArticlesCtrl{
     constructor($scope, $rootScope,  Articles, User, Auth, $compile){
         this.$rootScope = $rootScope;
         this.$scope = $scope;
-        this.Articles = Articles;        
-
+        this.Articles = Articles;
         $scope.articles = [];
-        
+
         $scope.$on('UserAuth', () => {
             Articles
                 .all({owner: Auth.getUser()._id, populate:'category'})
                 .then(
                     (res) => {
                         if (res.data.length == 0) {
-                            $scope.message = "You don't have any articles. Try to add one by pressing this button -->";
-
+                            $scope.message = "You don't have any articles yet. Try to add one by pressing 'Add note' button";
                         }
                         else {
                             $scope.articles = res.data;
@@ -55,14 +53,47 @@ class ArticlesCtrl{
                 
             },
             (x) => {
-                debugger;
+                console.log(x);
             }
     );
     }
+    editArticle(){
+        this.Articles.update( this.newArticle, this.article._id,).then(
+            () => {
+                if(this.newArticle.title){
+                    this.article.title = this.newArticle.title;
+                }
+                if(this.newArticle.text){
+                    this.article.text = this.newArticle.text;
+                }
+                if(this.newArticle.category){
+                    this.article.category = this.newArticle.category;
+                }
+                if(this.newArticle.tags && this.newArticle.tags == this.article.tags){
+                    debugger;
+                }
+                if(this.newArticle.color){
+                    this.article.color = this.newArticle.color;
+                }
+                $('.modal').modal('hide');
 
-    toggleModal(article){
+            },
+            (x) => {
+                console.log(x);
+            });
+    }
+
+    toggleModal(article, action){
+        switch(action){
+            case 'remove':
+                $('#deleteArticle').modal('show');
+                break;
+            case 'edit':
+                $('#editArticle').modal('show');
+                break;
+        }
         this.article = article;        
-        $('.bs-example-modal-sm').modal('show');
+
     }
 
 }

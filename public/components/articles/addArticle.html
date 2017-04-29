@@ -1,9 +1,9 @@
-<form novalidate class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+<form novalidate class="modal fade bs-example-modal-lg" id="createArticle" tabindex="-1" role="dialog"
 	  aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="form-group modal-header">
-				<span class="modal-title h4">New article</span>
+				<span class="modal-title h4">New note</span>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 						aria-hidden="true">&times;</span></button>
 	</div>
@@ -14,14 +14,15 @@
 				<textarea class="form-control"
 						  ng-model="vm.article.text" placeholder='Put some text' rows="3" required>
 				</textarea>
-				<br>
-				<div class="categories">
-					<categories family="categories"></categories>
-				</div>
 
+				<div style="margin:20px 0;">Choose color: <input type="color" id="color"></div>
+
+				<div class="categories">
+					Categories:<categories family="categories"></categories>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-primary" type="submit" ng-click="vm.addArticle()">Public</button>
+				<button class="btn btn-primary" type="submit" ng-click="vm.addArticle()">Create</button>
 				<button class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>

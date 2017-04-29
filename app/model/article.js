@@ -9,6 +9,13 @@ module.exports = function(app) {
       type: String,
       required: true
     },
+    color:{
+      type:String,
+      default:'#ececec'
+    },
+    date:{
+        type: Date
+    },
     tag: {
       type: Array
     },
@@ -25,8 +32,8 @@ module.exports = function(app) {
       ref: 'user'
     }
   });
-
   Schema.pre('save', function(next) {
+    this.date = new Date();
     this.owner = app.user.id;
     User.update({_id: app.user._id},{$pushAll: {article:[this._id]}}, function(err){
       if(err){

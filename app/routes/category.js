@@ -29,7 +29,7 @@ module.exports = function () {
                             cb(null, item);
                         })
                     })
-                } else  {
+                } else {
                     cb(null, item)
                 }
             }
@@ -43,11 +43,11 @@ module.exports = function () {
                     ch.push(_item);
                 });
             });
-            items.forEach((item_i)=>{
+            items.forEach((item_i) => {
 
                 var isRoot = true;
                 ch.forEach((item) => {
-                    if(item.toString() == item_i._id.toString()) {
+                    if (item.toString() == item_i._id.toString()) {
                         isRoot = false
                     }
                 });

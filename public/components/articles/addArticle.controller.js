@@ -20,7 +20,7 @@ class addArticleCtrl{
         });
         Categories.getTree().then(
             (res)=>{
-                $scope.categories = {name:"Categories",children:res.data};
+                $scope.categories = res.data;
             },
             (err)=>{
                 console.log(err);
@@ -36,9 +36,12 @@ class addArticleCtrl{
 
 
     addArticle() {
-        this.Articles.add({title: this.article.title, text: this.article.text, tag:this.article.tags, category:this.article.category})
+        this.article.color = $('#color').val();
+        this.Articles.add({title: this.article.title, text: this.article.text, tag:this.article.tags, category:this.article.category, color:this.article.color})
             .then(
                 (res) => {
+                    delete this.article;
+                    $('#color').val('#000');
                     $('.modal').modal('hide');
                 },
                 (err) => {

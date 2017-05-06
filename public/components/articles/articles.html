@@ -6,8 +6,8 @@
 {{message}}
 
 <div class="media" ng-repeat="article in articles | orderBy:'-article.date'">
-    <div class="media-body" style="position:relative;background: {{article.color}}; padding: 50px;">
-        <div class="btn-group" style="position: absolute; top:0; right: 0;">
+    <div class="media-body" style="position:relative;background: {{article.color}}; padding: 50px; ">
+        <div class="btn-group tool">
             <button class="btn btn-link btn-sm" ng-click="vm.toggleModal(article,'edit')">
                 <span class="glyphicon glyphicon-pencil"></span>
             </button>
@@ -18,7 +18,7 @@
         <span class="h2 media-heading" style="margin-bottom: 50px;display: block">{{article.title}}</span>
         <p style="white-space: pre-wrap;text-align: justify">{{article.text}}
         </p>
-        <span class="h6" style="color:dodgerblue;" ng-repeat="tags in article.tag">#{{tags + " "}}</span>
+        <span class="h6" style="color:dodgerblue;" ng-repeat="tags in article.tag">#{{tags.text + " "}}</span>
         <span class="h5" style="float: right">Category:<span style="color:red;">{{article.category.name}}</span></span>
         <p class="h6">{{article.date | date:'medium'}}</p>
     </div>
@@ -45,12 +45,25 @@
                 <span class="modal-title h4">Edit note</span>
             </div>
             <div class="form-group modal-body">
-                <input type="text" class="form-control" ng-model="vm.newArticle.title" placeholder="Title" required>
+                <input type="text" class="form-control" ng-model="vm.article.title" placeholder="Title" required>
                 <br><div id="select2-container-edit"></div>
                 <br>
                 <textarea class="form-control"
-                          ng-model="vm.newArticle.text" placeholder='Put some text' rows="3" required>
+                          ng-model="vm.article.text" placeholder='Put some text' rows="3" required>
 				</textarea>
+                <br>
+                <tags-input min-length="0" ng-model="vm.article.tag" display-property="text" placeholder="Add some tags">
+                    <auto-complete source="tagPromise"></auto-complete>
+                </tags-input>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">Chose color of note:</div>
+                    <div class="col-md-8">
+                        <select class="form-control" id="color">
+                            <option ng-repeat="color in vm.colors" style="background: {{color.color}}" value="{{color.color}}">{{color.name}}</option>
+                        </select>
+                    </div>
+                </div>
                 <br>
                 <div class="categories">
                     Categories:<categories family="categories"></categories>

@@ -5,6 +5,7 @@ var app = express();
 var User = require('./app/model/user');
 var Article = require('./app/model/article')(app);
 var Category = require('./app/model/category')();
+var Tag = require('./app/model/tag')();
 var users = require('./app/routes/user')(app);
 var articles = require('./app/routes/article')(app);
 var categories = require('./app/routes/category')();
@@ -56,6 +57,7 @@ app.use('/api/articles', crudRouter(Article, {noAuth: []}));
 app.use('/api/users', crudRouter(User, {noAuth: ['get','post']}));
 app.use('/api/userGroups', crudRouter(userGroups, {noAuth: []}));
 app.use('/api/categories', crudRouter(Category, {noAuth: []}));
+app.use('/api/tags', crudRouter(Tag, {noAuth: []}));
 
 app.use('/api/uploads', express.static('uploads'));
 app.use('/api/json', express.static('json'));

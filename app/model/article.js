@@ -5,6 +5,10 @@ var User = require('./user');
 module.exports = function(app) {
 
   var Schema = new mongoose.Schema({
+      title: {
+          type: String,
+          required: true
+      },
     text: {
       type: String,
       required: true
@@ -16,17 +20,14 @@ module.exports = function(app) {
     date:{
         type: Date
     },
-    tag: {
-      type: Array
-    },
-    title:{
-      type: String,
-      required:true
-    },
-    category:{
-      type: ObjectId,
+    tag: [{
+        type:ObjectId,
+        ref:'Tag'
+    }],
+      category: [{
+          type: ObjectId,
       ref: 'Category'
-    },
+      }],
     owner:{
       type:ObjectId,
       ref: 'user'

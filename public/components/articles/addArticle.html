@@ -9,20 +9,31 @@
 	</div>
 			<div class="form-group modal-body">
 				<input type="text" class="form-control" ng-model="vm.article.title" placeholder="Title" required>
-				<br><div id="select2-container"></div>
 				<br>
 				<textarea class="form-control"
 						  ng-model="vm.article.text" placeholder='Put some text' rows="3" required>
 				</textarea>
-
-				<div style="margin:20px 0;">Choose color: <input type="color" id="color"></div>
-
+				<br>
+				<tags-input min-length="0" ng-model="vm.article.tags" placeholder="Add some tags">
+					<auto-complete source="tagPromise"></auto-complete>
+				</tags-input>
+				<br>
+				<div class="row">
+					<div class="col-md-4">Chose color of note:</div>
+					<div class="col-md-8">
+						<select class="form-control" id="color">
+						<option ng-repeat="color in vm.colors" style="background: {{color.color}}" value="{{color.color}}">{{color.name}}</option>
+						</select>
+					</div>
+				</div>
+				<br>
 				<div class="categories">
 					Categories:<categories family="categories"></categories>
 				</div>
+				All fields are required
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-primary" type="submit" ng-click="vm.addArticle()">Create</button>
+				<button class="btn btn-primary" type="submit" ng-click="vm.addArticle();">Create</button>
 				<button class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>

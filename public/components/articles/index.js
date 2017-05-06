@@ -6,7 +6,7 @@ import addArticleCtrl from "./addArticle.controller";
 import articlesTpl from "./articles.html";
 import addArticleTpl from "./addArticle.html";
 
-/*import "./article.styl";*/
+import "./article.styl";
 
 
 const NAME = 'articles';
@@ -34,11 +34,11 @@ function addArticleDirective() {
 angular
     .module(NAME, [Categories])
     .directive('articles', articlesDirective)
-    .controller('articlesCtrl', ['$scope', '$rootScope', 'Articles', 'User', 'Auth','$compile', ArticlesCtrl])
+    .controller('articlesCtrl', ['$scope', '$rootScope', 'Articles', 'User', 'Auth','Tags','$q', ArticlesCtrl])
     .service('Articles', ['$http', '$q', '$state', '$rootScope', Articles])
 
     .directive('addArticle', addArticleDirective)
-    .controller('addArticleCtrl', ['$scope', 'Articles', '$compile', 'Categories', addArticleCtrl])
+    .controller('addArticleCtrl', ['$scope', 'Articles','Categories','Tags','$q', addArticleCtrl])
 
     .config(function ($stateProvider) {
         $stateProvider

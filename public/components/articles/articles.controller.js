@@ -1,14 +1,41 @@
+import _ from 'lodash';
+
 class ArticlesCtrl{
 
-    constructor($scope, $rootScope,  Articles, User, Auth, $compile){
+    constructor($scope, $rootScope,  Articles, User, Auth, Tags, $q){
         this.$rootScope = $rootScope;
         this.$scope = $scope;
         this.Articles = Articles;
+        this.Tags = Tags;
         $scope.articles = [];
-
+        Tags.all().then(
+            (res)=>{
+                var deferred = $q.defer();
+                deferred.resolve(res.data);
+                $scope.tagPromise = deferred.promise;
+                this.tags = res.data;
+            },
+            (err)=>{
+                console.log(err);
+            }
+        );
+        this.colors = [
+            {
+                name: 'Grey',
+                color: '#ececec'
+            },
+            {
+                name: 'Pink',
+                color: '#FFC0CB'
+            },
+            {
+                name: 'Green',
+                color: '#5effaa'
+            },
+        ];
         $scope.$on('UserAuth', () => {
             Articles
-                .all({owner: Auth.getUser()._id, populate:'category'})
+                .all({owner: Auth.getUser()._id, populate:'category|tag'})
                 .then(
                     (res) => {
                         if (res.data.length == 0) {
@@ -25,8 +52,16 @@ class ArticlesCtrl{
         });
         
         $scope.$on('articles:add', (event, article) => {
-            $scope.articles.push(article);
-            $scope.message = "";
+            console.log(article);
+            Articles.all({_id: article._id, populate:'category|tag'}).then(
+                (res)=>{
+                    console.log(res);
+                    $scope.articles.push(res.data[0]);
+                    $scope.message = "";
+                    },
+                (err)=>{console.log(err)}
+            );
+
         });
 
         $scope.$on('articles:delete', (event, article) => {
@@ -58,29 +93,38 @@ class ArticlesCtrl{
     );
     }
     editArticle(){
-        this.Articles.update( this.newArticle, this.article._id,).then(
-            () => {
-                if(this.newArticle.title){
-                    this.article.title = this.newArticle.title;
+        this.article.color = $('#color').val();
+        this.article.tag.forEach((tag, i, tags) => {
+            if(this.tags.indexOf(tag) > -1){
+                if (i == tags.length - 1) {
+                    this.Articles.update( this.article, this.article._id).then(
+                        () => {
+                            $('.modal').modal('hide');
+                            delete this.article;
+                        },
+                        (x) => {
+                            console.log(x);
+                        });
                 }
-                if(this.newArticle.text){
-                    this.article.text = this.newArticle.text;
-                }
-                if(this.newArticle.category){
-                    this.article.category = this.newArticle.category;
-                }
-                if(this.newArticle.tags && this.newArticle.tags == this.article.tags){
-                    debugger;
-                }
-                if(this.newArticle.color){
-                    this.article.color = this.newArticle.color;
-                }
-                $('.modal').modal('hide');
-
-            },
-            (x) => {
-                console.log(x);
-            });
+            } else {
+                this.Tags.add({text: tag.text}).then(
+                    (res) => {
+                        _.pull(this.article.tag,tag);
+                        this.article.tag.push(res);
+                        if (i == tags.length - 1) {
+                            this.Articles.update( this.article, this.article._id).then(
+                                () => {
+                                    $('.modal').modal('hide');
+                                    delete this.article;
+                                },
+                                (x) => {
+                                    console.log(x);
+                                });
+                        }
+                    }
+                )
+            }
+        });
     }
 
     toggleModal(article, action){
@@ -92,7 +136,8 @@ class ArticlesCtrl{
                 $('#editArticle').modal('show');
                 break;
         }
-        this.article = article;        
+        this.article = article;
+
 
     }
 
